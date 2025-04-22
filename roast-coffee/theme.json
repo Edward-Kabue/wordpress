@@ -1,0 +1,50 @@
+{
+    "version": 2,
+    "templateParts": [
+        {
+            "name": "footer",
+            "title": "Footer",
+            "area": "footer"
+        }
+    ],
+    "settings": {
+        "color": {
+            "palette": [
+                {
+                    "slug": "primary",
+                    "color": "#FFFFFF",
+                    "name": "Primary"
+                },
+                {
+                    "slug": "secondary",
+                    "color": "#121D23",
+                    "name": "Secondary"
+                },
+                {
+                    "slug": "accent",
+                    "color": "#C9A581",
+                    "name": "Accent"
+                },
+                {
+                    "slug": "text",
+                    "color": "#CECECE",
+                    "name": "Text"
+                }
+            ]
+        },
+        "typography": {
+            "fontFamilies": [
+                {
+                    "fontFamily": "Jost, sans-serif",
+                    "slug": "primary",
+                    "name": "Primary"
+                },
+                {
+                    "fontFamily": "Forum, serif",
+                    "slug": "accent",
+                    "name": "Accent"
+                }
+            ]
+        }
+    }
+}
