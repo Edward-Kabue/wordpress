@@ -1,122 +1,16 @@
 /*
-Theme Name: Roast Coffee
-Theme URI: https://your-theme-uri.com
-Author: Your Name
-Author URI: https://your-website.com
-Description: A WordPress theme for coffee shops
-Version: 1.0
-License: GNU General Public License v2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: roast-coffee
+Theme Name:         Sage Starter Theme
+Theme URI:          https://roots.io/sage/
+Description:        Sage is a WordPress starter theme with Elementor and Gutenberg support.
+Version:            11.0.1
+Author:             Roots
+Author URI:         https://roots.io/
+Text Domain:        sage
+License:            MIT License
+License URI:        https://opensource.org/licenses/MIT
+Requires PHP:       8.2
+Requires at least:  6.6
+Elementor tested up to: 3.18.0
+Elementor Pro tested up to: 3.18.0
 */
-
-/* Import custom styles */
-@import url('assets/css/custom.css');
-
-/* Basic theme styles */
-.site-main {
-    position: relative;
-    overflow: hidden;
-}
-
-.hero {
-    position: relative;
-    background: url('assets/images/hero-bg.jpg') no-repeat;
-    background-position: center center;
-    background-size: cover;
-    padding: 210px 0;
-    color: #fff;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-}
-
-.hero .container {
-    position: relative;
-    z-index: 2;
-}
-
-.hero-content {
-    position: relative;
-}
-
-.section-title h1 {
-    font-size: 3.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.section-title h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.btn-default {
-    display: inline-block;
-    padding: 15px 30px;
-    background: #b87d4b;
-    color: #fff;
-    text-decoration: none;
-    margin-right: 15px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-.btn-default:hover {
-    background: #9e6a3d;
-    color: #fff;
-}
-
-.btn-highlighted {
-    background: #fff;
-    color: #b87d4b;
-}
-
-.btn-highlighted:hover {
-    background: #f5f5f5;
-    color: #b87d4b;
-}
-
-.scrolling-ticker-box {
-    width: 100%;
-    overflow: hidden;
-    background: #f5f5f5;
-    padding: 20px 0;
-    margin: 20px 0;
-    border: 1px solid #ddd;
-}
-
-.scrolling-content {
-    display: flex;
-    animation: scroll 20s linear infinite;
-}
-
-.ticker-item {
-    display: flex;
-    align-items: center;
-    margin: 0 20px;
-    white-space: nowrap;
-}
-
-.asterisk {
-    margin-right: 10px;
-    color: #ff0000;
-}
-
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-100%);
-    }
-}
-
 

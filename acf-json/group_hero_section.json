@@ -1,0 +1,73 @@
+{
+    "key": "group_hero_section",
+    "title": "Hero Section",
+    "fields": [
+        {
+            "key": "field_hero_subtitle",
+            "label": "Hero Subtitle",
+            "name": "hero_subtitle",
+            "type": "text",
+            "default_value": "crafted with love, served with passion"
+        },
+        {
+            "key": "field_hero_title",
+            "label": "Hero Title",
+            "name": "hero_title",
+            "type": "text",
+            "default_value": "Step into the aroma of freshly coffee"
+        },
+        {
+            "key": "field_hero_description",
+            "label": "Hero Description",
+            "name": "hero_description",
+            "type": "textarea",
+            "default_value": "Discover a place where every cup is a masterpiece, crafted with passion and precision. From the rich, bold flavors of our signature blends to the cozy ambiance that feels like home."
+        },
+        {
+            "key": "field_discover_coffee_link",
+            "label": "Discover Coffee Link",
+            "name": "discover_coffee_link",
+            "type": "text",
+            "default_value": "about.html"
+        },
+        {
+            "key": "field_discover_coffee_text",
+            "label": "Discover Coffee Text",
+            "name": "discover_coffee_text",
+            "type": "text",
+            "default_value": "Discover coffee"
+        },
+        {
+            "key": "field_book_table_link",
+            "label": "Book Table Link",
+            "name": "book_table_link",
+            "type": "text",
+            "default_value": "book-table.html"
+        },
+        {
+            "key": "field_book_table_text",
+            "label": "Book Table Text",
+            "name": "book_table_text",
+            "type": "text",
+            "default_value": "book a table"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "template-home.blade.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": ""
+}
+
