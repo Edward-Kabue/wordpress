@@ -138,12 +138,19 @@ add_action('widgets_init', function () {
  * Theme setup
  */
 add_action('wp_enqueue_scripts', function () {
-    // Enqueue external scripts
-    wp_enqueue_script('gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js', [], null, true);
-    wp_enqueue_script('scrolltrigger', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js', ['gsap'], null, true);
-    wp_enqueue_script('splittext', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/SplitText.min.js', ['gsap'], null, true);
-    wp_enqueue_script('wow', 'https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js', [], null, true);
-    wp_enqueue_script('parallaxie', 'https://cdnjs.cloudflare.com/ajax/libs/parallaxie/0.5/parallaxie.min.js', ['jquery'], null, true);
+    // Add Google Fonts
+    wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Forum&family=Jost:ital,wght@0,100..900;1,100..900&display=swap', [], null);
+    
+    // Add external stylesheets
+    wp_enqueue_style('slicknav', 'https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/slicknav.min.css', [], null);
+    wp_enqueue_style('swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', [], null);
+    wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css', [], null);
+    wp_enqueue_style('animate', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css', [], null);
+    wp_enqueue_style('magnific-popup', 'https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css', [], null);
+    
+    // Add custom stylesheets
+    wp_enqueue_style('mouse-cursor', get_template_directory_uri() . '/resources/css/mousecursor.css', [], null);
+    wp_enqueue_style('custom', get_template_directory_uri() . '/resources/css/custom.css', [], null);
 }, 100);
 
 namespace App;

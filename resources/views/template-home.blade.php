@@ -5,166 +5,1428 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="home-page">
-    {{-- Hero Section --}}
-    <section class="hero parallaxie" {!! get_field('hero_background') ? 'style="background-image: url(' . esc_url(get_field('hero_background')) . ')"' : '' !!}>
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-8 col-md-10">
-            <div class="hero-content">
-              <div class="section-title">
-                <h3 class="wow fadeInUp">{{ get_field('hero_subtitle') }}</h3>
-                <h1 class="text-anime-style-3" data-cursor="-opaque">{{ get_field('hero_title') }}</h1>
-                <p class="wow fadeInUp" data-wow-delay="0.2s">{{ get_field('hero_description') }}</p>
-              </div>
-              
-              <div class="hero-btn wow fadeInUp" data-wow-delay="0.4s">
-                @php
-                  $primary_button = get_field('hero_primary_button');
-                  $secondary_button = get_field('hero_secondary_button');
-                @endphp
-                
-                @if($primary_button && is_array($primary_button))
-                  <a 
-                    href="{{ esc_url($primary_button['url'] ?? '#') }}" 
-                    class="btn-default"
-                    {!! isset($primary_button['target']) && $primary_button['target'] ? 'target="_blank"' : '' !!}
-                  >
-                    {{ $primary_button['title'] ?? 'Learn More' }}
-                  </a>
-                @endif
-                
-                @if($secondary_button && is_array($secondary_button))
-                  <a 
-                    href="{{ esc_url($secondary_button['url'] ?? '#') }}" 
-                    class="btn-default btn-highlighted"
-                    {!! isset($secondary_button['target']) && $secondary_button['target'] ? 'target="_blank"' : '' !!}
-                  >
-                    {{ $secondary_button['title'] ?? 'Book a Table' }}
-                  </a>
-                @endif
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    {{-- Scrolling Ticker Section --}}
-    @if($coffee_items = get_field('coffee_items'))
-    <div class="our-scrolling-ticker">
-      <div class="scrolling-ticker-box">
-        <div class="scrolling-content">
-          @foreach($coffee_items as $item)
-            <span>{!! wp_get_attachment_image(get_field('asterisk_icon', 'option'), 'full') !!}{{ $item['name'] }}</span>
-          @endforeach
-        </div>
-        <div class="scrolling-content">
-          @foreach($coffee_items as $item)
-            <span>{!! wp_get_attachment_image(get_field('asterisk_icon', 'option'), 'full') !!}{{ $item['name'] }}</span>
-          @endforeach
-        </div>
-      </div>
-    </div>
-    @endif
-
-    {{-- About Us Section --}}
-    <section class="about-us">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-6">
-            <div class="about-us-content">
-              <div class="section-title">
-                <h3 class="wow fadeInUp">{{ get_field('about_subtitle') }}</h3>
-                <h2 class="text-anime-style-3" data-cursor="-opaque">{{ get_field('about_title') }}</h2>
-              </div>
-              
-              <div class="about-body-list">
-                @if($features = get_field('about_features'))
-                  @foreach($features as $feature)
-                    <div class="about-body-item wow fadeInUp" data-wow-delay="0.2s">
-                      <div class="icon-box">
-                        {!! wp_get_attachment_image($feature['icon'], 'full') !!}
-                      </div>
-                      <div class="about-body-list-content">
-                        <h3>{{ $feature['title'] }}</h3>
-                        <p>{{ $feature['description'] }}</p>
-                      </div>
+  <!-- Hero Section Start -->
+    <div class="hero parallaxie">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 col-md-10">
+                    <!-- Hero Content Start -->
+                    <div class="hero-content">
+                        <!-- Section Title Start -->
+                        <div class="section-title">
+                            <h3 class="wow fadeInUp">crafted with love, served with passion</h3>
+                            <h1 class="text-anime-style-3" data-cursor="-opaque">Step into the aroma of freshly coffee</h1>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">Discover a place where every cup is a masterpiece, crafted with passion and precision. From the rich, bold flavors of our signature blends to the cozy ambiance that feels like home.</p>
+                        </div>
+                        <!-- Section Title End -->
+                        
+                        <!-- Hero Button Start -->
+                        <div class="hero-btn wow fadeInUp" data-wow-delay="0.4s">
+                            <a href="about.html" class="btn-default">Discover coffee</a>
+                            <a href="book-table.html" class="btn-default btn-highlighted">book a table</a>
+                        </div>
+                        <!-- Hero Button End -->
                     </div>
-                  @endforeach
-                @endif
-              </div>
-
-              <div class="about-us-footer wow fadeInUp" data-wow-delay="0.6s">
-                @php
-                  $about_button = get_field('about_button');
-                  $video_url = get_field('about_video_url');
-                @endphp
-
-                @if($about_button && is_array($about_button))
-                  <div class="about-btn">
-                    <a 
-                      href="{{ esc_url($about_button['url'] ?? '#') }}" 
-                      class="btn-default"
-                      {!! isset($about_button['target']) && $about_button['target'] ? 'target="_blank"' : '' !!}
-                    >
-                      {{ $about_button['title'] ?? 'Learn More' }}
-                    </a>
-                  </div>
-                @endif
-                
-                @if($video_url)
-                  <div class="video-play-button">
-                    <a 
-                      href="{{ esc_url($video_url) }}" 
-                      class="popup-video" 
-                      data-cursor-text="Play"
-                    >
-                      <i class="fa-solid fa-play"></i>
-                    </a>
-                    <p>watch video</p>
-                  </div>
-                @endif
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6">
-            <div class="about-us-image">
-              <div class="about-us-img">
-                <figure class="image-anime">
-                  {!! wp_get_attachment_image(get_field('about_image'), 'full') !!}
-                </figure>
-              </div>
-              
-              <div class="opening-time-box">
-                <div class="icon-box">
-                  <i class="fa-regular fa-clock"></i>
+                    <!-- Hero Content End -->
                 </div>
-                
-                <div class="opening-time-content">
-                  <h3>{{ get_field('opening_hours_title') }}</h3>
-                  @if($opening_hours = get_field('opening_hours'))
-                    <ul>
-                      @foreach($opening_hours as $hours)
-                        <li>{{ $hours['days'] }}<span>{{ $hours['time'] }}</span></li>
-                      @endforeach
-                    </ul>
-                  @endif
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-    </section>
+    </div>
+    <!-- Hero Section End -->
 
-    {{-- Why Choose Us Section --}}
-    @include('sections.why-choose-us')
+    <!-- Scrolling Ticker Section Start -->
+    <div class="our-scrolling-ticker">
+        <!-- Scrolling Ticker Start -->
+        <div class="scrolling-ticker-box">
+            <div class="scrolling-content">
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Espresso</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Americano</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Latte</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Cappuccino</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Mocha</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Macchiato</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Cold Brew</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Espresso</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Americano</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Latte</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Cappuccino</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Mocha</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Macchiato</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Cold Brew</span>
+            </div>
 
-    {{-- Intro Video Section --}}
-    @include('sections.intro-video')
-  </div>
+            <div class="scrolling-content">
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Espresso</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Americano</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Latte</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Cappuccino</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Mocha</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Macchiato</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Cold Brew</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Espresso</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Americano</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Latte</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Cappuccino</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Mocha</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Macchiato</span>
+                <span><img src="{{ get_template_directory_uri() }}/resources/images/asterisk-icon.svg" alt="">Cold Brew</span>
+            </div>
+        </div>
+        <!-- Scrolling Ticker End -->
+    </div>
+    <!-- Scrolling Ticker Section End -->
+
+    <!-- About us Section Start -->
+    <div class="about-us bg-[#0d1520] text-white py-24">
+        <div class="container mx-auto px-4 md:px-16">
+            <div class="grid md:grid-cols-2 items-center">
+                
+                <div >
+                    <!-- About us Content Start -->
+                    <div class="about-us-content">
+                        <!-- Section Title Start -->
+                        <div class="section-title mb-12">
+                            <div class="flex items-center gap-2 mb-4">
+                            
+                                <h3 class="text-[#E6C9A1] font-medium wow fadeInUp">About Us</h3>
+                            </div>
+                            <h2 class="text-4xl md:text-5xl font-serif tracking-wide leading-tight text-anime-style-3" data-cursor="-opaque">
+                                BRINGING PEOPLE TOGETHER,<br>
+                                ONE CUP AT A TIME
+                            </h2>
+                        </div>
+                        <!-- Section Title End -->
+                         
+                        <!-- About Body List Start -->
+                        <div class="about-body-list space-y-8">
+                            <!-- About Body Item Start -->
+                            <div class="about-body-item flex wow fadeInUp" data-wow-delay="0.2s">
+                                <div class="icon-box bg-[#1a2633] rounded-full p-4 h-16 w-16 flex items-center justify-center flex-shrink-0 mr-8">
+                                    <img src="{{ get_template_directory_uri() }}/resources/images/icon-about-body-item-1.svg" alt="" class="w-8 h-8">
+                                </div>
+                                <div class="about-body-list-content">
+                                    <h3 class="text-xl font-medium mb-2">Food Delivery</h3>
+                                    <p class="text-gray-400">With our fast and reliable food delivery service, your favorite coffee, snacks, and treats are just a click away.</p>
+                                </div>
+                            </div>
+                            <!-- About Body Item End -->
+                            
+                            <!-- About Body Item Start -->
+                            <div class="about-body-item flex wow fadeInUp" data-wow-delay="0.4s">
+                                <div class="icon-box bg-[#1a2633] rounded-full p-4 h-16 w-16 flex items-center justify-center flex-shrink-0 mr-8">
+                                    <img src="{{ get_template_directory_uri() }}/resources/images/icon-about-body-item-2.svg" alt="" class="w-8 h-8">
+                                </div>
+                                <div class="about-body-list-content">
+                                    <h3 class="text-xl font-medium mb-2">Event Elegance</h3>
+                                    <p class="text-gray-400">Host your special moments with us! From intimate gatherings to vibrant celebrations offers.</p>
+                                </div>
+                            </div>
+                            <!-- About Body Item End -->
+                        </div>
+                        <!-- About Body List End -->
+                        
+                        <!-- About Us Footer Start -->
+                        <div class="about-us-footer mt-16 wow fadeInUp" data-wow-delay="0.6s">
+                            <div class="flex items-center gap-8">
+                                <!-- About Button Start -->
+                                <div class="about-btn">
+                                    <a href="about.html" class="btn-default bg-[#E6C9A1] hover:bg-[#d4b78f] text-[#0d1520] px-6 py-3 rounded-full font-medium transition-colors inline-block">More About Us</a>
+                                </div>
+                                <!-- About Button End -->
+                               
+                            </div>
+                        </div>
+                        <!-- About Us Footer End -->
+                    </div>
+                    <!-- About us Content End -->
+                </div>
+    
+                <div>
+                    <!-- About Us Image Start -->
+                    <div class="about-us-image">
+                        <div class="about-us-img">
+                            <figure class="image-anime rounded-full overflow-hidden aspect-square">
+                                <img src="{{ get_template_directory_uri() }}/resources/images/about-us-image.jpg" alt="" class="w-full h-full object-cover">
+                            </figure>
+                        </div>
+                        
+                        <!-- Opening Time Box Start -->
+                        <div class="opening-time-box absolute bottom-12 -left-4 md:bottom-16 md:-left-16 bg-[#E6C9A1] text-[#0d1520] p-6 rounded-lg max-w-xs">
+                            <div class="flex items-center gap-2 mb-4">
+                                <div class="icon-box bg-[#0d1520] rounded-full p-2 w-10 h-10 flex items-center justify-center">
+                                    <i class="fa-regular fa-clock text-[#E6C9A1]"></i>
+                                </div>
+                                <h3 class="font-medium text-lg">Open Hours</h3>
+                            </div>
+                            <div class="opening-time-content">
+                                <ul class="space-y-2">
+                                    <li class="flex justify-between">
+                                        <span>Monday - Friday</span>
+                                        <span>09:30 - 7:30</span>
+                                    </li>
+                                    <li class="flex justify-between">
+                                        <span>Saturday</span>
+                                        <span>10:30 - 5:00</span>
+                                    </li>
+                                    <li class="flex justify-between">
+                                        <span>Sunday</span>
+                                        <span>24 hours open</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Opening Time Box End -->
+                    </div>
+                    <!-- About Us Image End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About us Section End -->
+
+    <!-- Why Choose Us Section Start -->
+    <div class="why-choose-us light-bg-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <!-- Why Choose Content Start -->
+                    <div class="why-choose-content">
+                        <!-- Section Title Start -->
+                        <div class="section-title">
+                            <h3 class="wow fadeInUp">why choose us</h3>
+                            <h2 class="text-anime-style-3" data-cursor="-opaque">Where flavor meets comfort and services</h2>
+                        </div>
+                        <!-- Section Title End -->
+
+                        <!-- Why Choose Button Start -->
+                        <div class="why-choose-btn wow fadeInUp" data-wow-delay="0.2s">
+                            <a href="contact.html" class="btn-default">contact us</a>
+                        </div>
+                        <!-- Why Choose Button End -->
+                    </div>
+                    <!-- Why Choose Content End -->
+                </div>
+
+                <div class="col-lg-6">
+                    <!-- Why Choose List Start -->
+                    <div class="why-choose-list wow fadeInUp" data-wow-delay="0.2s">
+                        <!-- Why Choose Item Start -->
+                        <div class="why-choose-item">
+                            <div class="icon-box">
+                                <img src="{{ get_template_directory_uri() }}/resources/images/icon-why-choose-1.svg" alt="">
+                            </div>
+                            <div class="why-choose-item-content">
+                                <h3>fully responsive</h3>
+                                <p>Designed to reduce allergens, dust, and pollutants, these systems create a healthier.</p>
+                            </div>
+                        </div>
+                        <!-- Why Choose Item End -->
+
+                        <!-- Why Choose Item Start -->
+                        <div class="why-choose-item">
+                            <div class="icon-box">
+                                <img src="{{ get_template_directory_uri() }}/resources/images/icon-why-choose-2.svg" alt="">
+                            </div>
+                            <div class="why-choose-item-content">
+                                <h3>fresh ingredients</h3>
+                                <p>Designed to reduce allergens, dust, and pollutants, these systems create a healthier.</p>
+                            </div>
+                        </div>
+                        <!-- Why Choose Item End -->
+
+                        <!-- Why Choose Item Start -->
+                        <div class="why-choose-item">
+                            <div class="icon-box">
+                                <img src="{{ get_template_directory_uri() }}/resources/images/icon-why-choose-3.svg" alt="">
+                            </div>
+                            <div class="why-choose-item-content">
+                                <h3>exclusive chef's</h3>
+                                <p>Designed to reduce allergens, dust, and pollutants, these systems create a healthier.</p>
+                            </div>
+                        </div>
+                        <!-- Why Choose Item End -->
+
+                        <!-- Why Choose Item Start -->
+                        <div class="why-choose-item">
+                            <div class="icon-box">
+                                <img src="{{ get_template_directory_uri() }}/resources/images/icon-why-choose-4.svg" alt="">
+                            </div>
+                            <div class="why-choose-item-content">
+                                <h3>fast services</h3>
+                                <p>Designed to reduce allergens, dust, and pollutants, these systems create a healthier.</p>
+                            </div>
+                        </div>
+                        <!-- Why Choose Item End -->
+
+
+                        <!-- Why Choose Item Start -->
+                        <div class="why-choose-item">
+                            <div class="icon-box">
+                                <img src="{{ get_template_directory_uri() }}/resources/images/icon-why-choose-5.svg" alt="">
+                            </div>
+                            <div class="why-choose-item-content">
+                                <h3>friendly atmosphere</h3>
+                                <p>Designed to reduce allergens, dust, and pollutants, these systems create a healthier.</p>
+                            </div>
+                        </div>
+                        <!-- Why Choose Item End -->
+
+
+                        <!-- Why Choose Item Start -->
+                        <div class="why-choose-item">
+                            <div class="icon-box">
+                                <img src="{{ get_template_directory_uri() }}/resources/images/icon-why-choose-6.svg" alt="">
+                            </div>
+                            <div class="why-choose-item-content">
+                                <h3>Free WIFI</h3>
+                                <p>Designed to reduce allergens, dust, and pollutants, these systems create a healthier.</p>
+                            </div>
+                        </div>
+                        <!-- Why Choose Item End -->
+                    </div>
+                    <!-- Why Choose List End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Why Choose Us Section End -->
+
+    <!-- Intro Video Section Start -->
+    <div class="intro-video parallaxie">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-8">
+                    <!-- Intro Video Content Start -->
+                    <div class="intro-video-content">
+                        <!-- Section Title Start -->
+                        <div class="section-title">
+                            <h3 class="wow fadeInUp">our journey of success</h3>
+                            <h2 class="text-anime-style-3" data-cursor="-opaque">Our coffee adventure, your favorite place</h2>
+                        </div>
+                        <!-- Section Title End -->
+                    </div>
+                    <!-- Intro Video Content End -->
+                </div>
+
+                <div class="col-lg-6 col-md-4">
+                    <!-- Intro Video Box Start -->
+                    <div class="intro-video-box about-intro-video wow fadeInUp" data-wow-delay="0.2s">
+                        <!-- Video Play Button Start -->
+                        <div class="video-play-button">
+                            <a href="https://www.youtube.com/watch?v=Y-x0efG1seA" class="popup-video" data-cursor-text="Play">
+                                <i class="fa-solid fa-play"></i>
+                            </a>
+                            <p>watch video</p>
+                        </div>
+                        <!-- Video Play Button End -->
+                    </div>
+                    <!-- Intro Video Box End -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Intro Video Counters Start -->
+                    <div class="intro-video-counters">
+                        <!-- Video Counter Item Start -->
+                        <div class="video-counter-item">
+                            <div class="icon-box">
+                                <img src="{{ get_template_directory_uri() }}/resources/images/icon-intro-video-counter-1.svg" alt="">
+                            </div>
+                            <div class="video-counter-content">
+                                <h2><span class="counter">300</span>+</h2>
+                            <p>daily visitors</p>
+                            </div>
+                        </div>
+                        <!-- Video Counter Item End -->
+
+                        <!-- Video Counter Item Start -->
+                        <div class="video-counter-item">
+                            <div class="icon-box">
+                                <img src="{{ get_template_directory_uri() }}/resources/images/icon-intro-video-counter-2.svg" alt="">
+                            </div>
+                            <div class="video-counter-content">
+                                <h2><span class="counter">50</span></h2>
+                            <p>recipe created</p>
+                            </div>
+                        </div>
+                        <!-- Video Counter Item End -->
+
+                        <!-- Video Counter Item Start -->
+                        <div class="video-counter-item">
+                            <div class="icon-box">
+                                <img src="{{ get_template_directory_uri() }}/resources/images/icon-intro-video-counter-3.svg" alt="">
+                            </div>
+                            <div class="video-counter-content">
+                                <h2><span class="counter">120</span>+</h2>
+                                <p>events hosted</p>
+                            </div>
+                        </div>
+                        <!-- Video Counter Item End -->
+
+                        <!-- Video Counter Item Start -->
+                        <div class="video-counter-item">
+                            <div class="icon-box">
+                                <img src="{{ get_template_directory_uri() }}/resources/images/icon-intro-video-counter-4.svg" alt="">
+                            </div>
+                            <div class="video-counter-content">
+                                <h2><span class="counter">500</span>+</h2>
+                                <p>happy customer</p>
+                            </div>
+                        </div>
+                        <!-- Video Counter Item End -->
+                    </div>
+                    <!-- Intro Video Counters End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Intro Video Section End -->
+
+    <!-- Our Pricing Section Start -->
+    <div class="our-pricing">
+        <div class="container">
+            <div class="row section-row">
+                <div class="col-lg-12">
+                    <!-- Section Title Start -->
+                    <div class="section-title">
+                        <h3 class="wow fadeInUp">Our pricing</h3>
+                        <h2 class="text-anime-style-3" data-cursor="-opaque">Savor every moment, without the premium price</h2>
+                    </div>
+                    <!-- Section Title End -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="our-pricing-box tab-content" id="pricingtab">
+                        <!-- Sidebar Our Support Nav start -->
+                        <div class="our-support-nav wow fadeInUp" data-wow-delay="0.2s">
+                            <ul class="nav nav-tabs" id="mvTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="btn-default btn-highlighted active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all" type="button" role="tab" aria-selected="true">All Menu</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="btn-default btn-highlighted" id="see-food-tab" data-bs-toggle="tab" data-bs-target="#see-food" type="button" role="tab" aria-selected="false">See food</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="btn-default btn-highlighted" id="desserts-tab" data-bs-toggle="tab" data-bs-target="#desserts" type="button" role="tab" aria-selected="false">Desserts</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="btn-default btn-highlighted" id="drink-tab" data-bs-toggle="tab" data-bs-target="#drink" type="button" role="tab" aria-selected="true">Drink & wine</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Sidebar Our Support Nav End -->
+
+                        <!-- Pricing Boxes Start -->
+                        <div class="pricing-boxes tab-pane fade show active" id="all" role="tabpanel">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6">
+                                    <!-- Pricing Image Start -->
+                                    <div class="pricing-image">
+                                        <figure class="image-anime">
+                                            <img src="{{ get_template_directory_uri() }}/resources/images/pricing-tab-image-1.jpg" alt="">
+                                        </figure>
+                                    </div>
+                                    <!-- Pricing Image End -->
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <!-- Our Menu List Start -->
+                                    <div class="our-menu-list">
+                                        <!-- Our Menu Item Start -->
+                                        <div class="menu-list-item">
+                                            <!-- Our Menu Image Start -->
+                                            <div class="menu-list-image">
+                                                <figure>
+                                                    <img src="{{ get_template_directory_uri() }}/resources/images/pricing-menu-1.png" alt="">
+                                                </figure>
+                                            </div>
+                                            <!-- Our Menu Image End -->
+        
+                                            <!-- Menu Item Body Start -->
+                                            <div class="menu-item-body">
+                                                <!-- Menu Item Title Start -->
+                                                <div class="menu-item-title">
+                                                    <h3>chips & dip</h3>
+                                                    <hr>
+                                                    <span>$16.00</span>
+                                                </div>
+                                                <!-- Menu Item Title End -->
+        
+                                                <!-- Menu Item Content Start -->
+                                                <div class="menu-item-content">
+                                                    <p>A perfect pairing of crispy, freshly made chips and rich, flavorful dips that bring a burst of taste in every bite.</p>
+                                                </div>
+                                                <!-- Menu Item Content End -->
+                                            </div>
+                                            <!-- Menu Item Body End -->
+                                        </div>
+                                        
+                                        <!-- Our Menu Item Start -->
+                                        <div class="menu-list-item">
+                                            <!-- Our Menu Image Start -->
+                                            <div class="menu-list-image">
+                                                <figure>
+                                                    <img src="{{ get_template_directory_uri() }}/resources/images/pricing-menu-2.png" alt="">
+                                                </figure>
+                                            </div>
+                                            <!-- Our Menu Image End -->
+        
+                                            <!-- Menu Item Body Start -->
+                                            <div class="menu-item-body">
+                                                <!-- Menu Item Title Start -->
+                                                <div class="menu-item-title">
+                                                    <h3>tender octopus</h3>
+                                                    <hr>
+                                                    <span>$16.00</span>
+                                                </div>
+                                                <!-- Menu Item Title End -->
+        
+                                                <!-- Menu Item Content Start -->
+                                                <div class="menu-item-content">
+                                                    <p>A perfect pairing of crispy, freshly made chips and rich, flavorful dips that bring a burst of taste in every bite.</p>
+                                                </div>
+                                                <!-- Our Menu Item End -->
+                                                <!-- Menu Item Content End -->
+                                            </div>
+                                            <!-- Menu Item Body End -->
+                                        </div>
+                                        <!-- Our Menu Item End -->
+                                        
+                                        <!-- Our Menu Item Start -->
+                                        <div class="menu-list-item">
+                                            <!-- Our Menu Image Start -->
+                                            <div class="menu-list-image">
+                                                <figure>
+                                                    <img src="{{ get_template_directory_uri() }}/resources/images/pricing-menu-3.png" alt="">
+                                                </figure>
+                                            </div>
+                                            <!-- Our Menu Image End -->
+        
+                                            <!-- Menu Item Body Start -->
+                                            <div class="menu-item-body">
+                                                <!-- Menu Item Title Start -->
+                                                <div class="menu-item-title">
+                                                    <h3>grilled veal filet</h3>
+                                                    <hr>
+                                                    <span>$16.00</span>
+                                                </div>
+                                                <!-- Menu Item Title End -->
+        
+                                                <!-- Menu Item Content Start -->
+                                                <div class="menu-item-content">
+                                                    <p>A perfect pairing of crispy, freshly made chips and rich, flavorful dips that bring a burst of taste in every bite.</p>
+                                                </div>
+                                                <!-- Menu Item Content End -->
+                                            </div>
+                                            <!-- Menu Item Body End -->
+                                        </div>
+                                        <!-- Our Menu Item End -->
+
+                                        <!-- Our Menu Item Start -->
+                                        <div class="menu-list-item">
+                                            <!-- Our Menu Image Start -->
+                                            <div class="menu-list-image">
+                                                <figure>
+                                                    <img src="{{ get_template_directory_uri() }}/resources/images/pricing-menu-4.png" alt="">
+                                                </figure>
+                                            </div>
+                                            <!-- Our Menu Image End -->
+        
+                                            <!-- Menu Item Body Start -->
+                                            <div class="menu-item-body">
+                                                <!-- Menu Item Title Start -->
+                                                <div class="menu-item-title">
+                                                    <h3>Mexican soup</h3>
+                                                    <hr>
+                                                    <span>$16.00</span>
+                                                </div>
+                                                <!-- Menu Item Title End -->
+        
+                                                <!-- Menu Item Content Start -->
+                                                <div class="menu-item-content">
+                                                    <p>A perfect pairing of crispy, freshly made chips and rich, flavorful dips that bring a burst of taste in every bite.</p>
+                                                </div>
+                                                <!-- Menu Item Content End -->
+                                            </div>
+                                            <!-- Menu Item Body End -->
+                                        </div>
+                                        <!-- Our Menu Item End -->
+                                    </div>
+                                    <!-- Our Menu List End -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Pricing Boxes End -->
+                        
+                        <!-- Pricing Boxes Start -->
+                        <div class="pricing-boxes tab-pane fade" id="see-food" role="tabpanel">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6">
+                                    <!-- Pricing Image Start -->
+                                    <div class="pricing-image">
+                                        <figure class="image-anime">
+                                            <img src="{{ get_template_directory_uri() }}/resources/images/pricing-tab-image-2.jpg" alt="">
+                                        </figure>
+                                    </div>
+                                    <!-- Pricing Image End -->
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <!-- Our Menu List Start -->
+                                    <div class="our-menu-list">
+                                        <!-- Our Menu Item Start -->
+                                        <div class="menu-list-item">
+                                            <!-- Our Menu Image Start -->
+                                            <div class="menu-list-image">
+                                                <figure>
+                                                    <img src="{{ get_template_directory_uri() }}/resources/images/pricing-menu-1.png" alt="">
+                                                </figure>
+                                            </div>
+                                            <!-- Our Menu Image End -->
+        
+                                            <!-- Menu Item Body Start -->
+                                            <div class="menu-item-body">
+                                                <!-- Menu Item Title Start -->
+                                                <div class="menu-item-title">
+                                                    <h3>chips & dip</h3>
+                                                    <hr>
+                                                    <span>$16.00</span>
+                                                </div>
+                                                <!-- Menu Item Title End -->
+        
+                                                <!-- Menu Item Content Start -->
+                                                <div class="menu-item-content">
+                                                    <p>A perfect pairing of crispy, freshly made chips and rich, flavorful dips that bring a burst of taste in every bite.</p>
+                                                </div>
+                                                <!-- Menu Item Content End -->
+                                            </div>
+                                            <!-- Menu Item Body End -->
+                                        </div>
+                                        
+                                        <!-- Our Menu Item Start -->
+                                        <div class="menu-list-item">
+                                            <!-- Our Menu Image Start -->
+                                            <div class="menu-list-image">
+                                                <figure>
+                                                    <img src="{{ get_template_directory_uri() }}/resources/images/pricing-menu-2.png" alt="">
+                                                </figure>
+                                            </div>
+                                            <!-- Our Menu Image End -->
+        
+                                            <!-- Menu Item Body Start -->
+                                            <div class="menu-item-body">
+                                                <!-- Menu Item Title Start -->
+                                                <div class="menu-item-title">
+                                                    <h3>tender octopus</h3>
+                                                    <hr>
+                                                    <span>$16.00</span>
+                                                </div>
+                                                <!-- Menu Item Title End -->
+        
+                                                <!-- Menu Item Content Start -->
+                                                <div class="menu-item-content">
+                                                    <p>A perfect pairing of crispy, freshly made chips and rich, flavorful dips that bring a burst of taste in every bite.</p>
+                                                </div>
+                                                <!-- Our Menu Item End -->
+                                                <!-- Menu Item Content End -->
+                                            </div>
+                                            <!-- Menu Item Body End -->
+                                        </div>
+                                        <!-- Our Menu Item End -->
+                                        
+                                        <!-- Our Menu Item Start -->
+                                        <div class="menu-list-item">
+                                            <!-- Our Menu Image Start -->
+                                            <div class="menu-list-image">
+                                                <figure>
+                                                    <img src="{{ get_template_directory_uri() }}/resources/images/pricing-menu-3.png" alt="">
+                                                </figure>
+                                            </div>
+                                            <!-- Our Menu Image End -->
+        
+                                            <!-- Menu Item Body Start -->
+                                            <div class="menu-item-body">
+                                                <!-- Menu Item Title Start -->
+                                                <div class="menu-item-title">
+                                                    <h3>grilled veal filet</h3>
+                                                    <hr>
+                                                    <span>$16.00</span>
+                                                </div>
+                                                <!-- Menu Item Title End -->
+        
+                                                <!-- Menu Item Content Start -->
+                                                <div class="menu-item-content">
+                                                    <p>A perfect pairing of crispy, freshly made chips and rich, flavorful dips that bring a burst of taste in every bite.</p>
+                                                </div>
+                                                <!-- Menu Item Content End -->
+                                            </div>
+                                            <!-- Menu Item Body End -->
+                                        </div>
+                                        <!-- Our Menu Item End -->
+
+                                        <!-- Our Menu Item Start -->
+                                        <div class="menu-list-item">
+                                            <!-- Our Menu Image Start -->
+                                            <div class="menu-list-image">
+                                                <figure>
+                                                    <img src="{{ get_template_directory_uri() }}/resources/images/pricing-menu-4.png" alt="">
+                                                </figure>
+                                            </div>
+                                            <!-- Our Menu Image End -->
+        
+                                            <!-- Menu Item Body Start -->
+                                            <div class="menu-item-body">
+                                                <!-- Menu Item Title Start -->
+                                                <div class="menu-item-title">
+                                                    <h3>Mexican soup</h3>
+                                                    <hr>
+                                                    <span>$16.00</span>
+                                                </div>
+                                                <!-- Menu Item Title End -->
+        
+                                                <!-- Menu Item Content Start -->
+                                                <div class="menu-item-content">
+                                                    <p>A perfect pairing of crispy, freshly made chips and rich, flavorful dips that bring a burst of taste in every bite.</p>
+                                                </div>
+                                                <!-- Menu Item Content End -->
+                                            </div>
+                                            <!-- Menu Item Body End -->
+                                        </div>
+                                        <!-- Our Menu Item End -->
+                                    </div>
+                                    <!-- Our Menu List End -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Pricing Boxes End -->
+
+                        <!-- Pricing Boxes Start -->
+                        <div class="pricing-boxes tab-pane fade" id="desserts" role="tabpanel">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6">
+                                    <!-- Pricing Image Start -->
+                                    <div class="pricing-image">
+                                        <figure class="image-anime">
+                                            <img src="{{ get_template_directory_uri() }}/resources/images/pricing-tab-image-3.jpg" alt="">
+                                        </figure>
+                                    </div>
+                                    <!-- Pricing Image End -->
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <!-- Our Menu List Start -->
+                                    <div class="our-menu-list">
+                                        <!-- Our Menu Item Start -->
+                                        <div class="menu-list-item">
+                                            <!-- Our Menu Image Start -->
+                                            <div class="menu-list-image">
+                                                <figure>
+                                                    <img src="{{ get_template_directory_uri() }}/resources/images/pricing-menu-1.png" alt="">
+                                                </figure>
+                                            </div>
+                                            <!-- Our Menu Image End -->
+        
+                                            <!-- Menu Item Body Start -->
+                                            <div class="menu-item-body">
+                                                <!-- Menu Item Title Start -->
+                                                <div class="menu-item-title">
+                                                    <h3>chips & dip</h3>
+                                                    <hr>
+                                                    <span>$16.00</span>
+                                                </div>
+                                                <!-- Menu Item Title End -->
+        
+                                                <!-- Menu Item Content Start -->
+                                                <div class="menu-item-content">
+                                                    <p>A perfect pairing of crispy, freshly made chips and rich, flavorful dips that bring a burst of taste in every bite.</p>
+                                                </div>
+                                                <!-- Menu Item Content End -->
+                                            </div>
+                                            <!-- Menu Item Body End -->
+                                        </div>
+                                        
+                                        <!-- Our Menu Item Start -->
+                                        <div class="menu-list-item">
+                                            <!-- Our Menu Image Start -->
+                                            <div class="menu-list-image">
+                                                <figure>
+                                                    <img src="{{ get_template_directory_uri() }}/resources/images/pricing-menu-2.png" alt="">
+                                                </figure>
+                                            </div>
+                                            <!-- Our Menu Image End -->
+        
+                                            <!-- Menu Item Body Start -->
+                                            <div class="menu-item-body">
+                                                <!-- Menu Item Title Start -->
+                                                <div class="menu-item-title">
+                                                    <h3>tender octopus</h3>
+                                                    <hr>
+                                                    <span>$16.00</span>
+                                                </div>
+                                                <!-- Menu Item Title End -->
+        
+                                                <!-- Menu Item Content Start -->
+                                                <div class="menu-item-content">
+                                                    <p>A perfect pairing of crispy, freshly made chips and rich, flavorful dips that bring a burst of taste in every bite.</p>
+                                                </div>
+                                                <!-- Our Menu Item End -->
+                                                <!-- Menu Item Content End -->
+                                            </div>
+                                            <!-- Menu Item Body End -->
+                                        </div>
+                                        <!-- Our Menu Item End -->
+                                        
+                                        <!-- Our Menu Item Start -->
+                                        <div class="menu-list-item">
+                                            <!-- Our Menu Image Start -->
+                                            <div class="menu-list-image">
+                                                <figure>
+                                                    <img src="{{ get_template_directory_uri() }}/resources/images/pricing-menu-3.png" alt="">
+                                                </figure>
+                                            </div>
+                                            <!-- Our Menu Image End -->
+        
+                                            <!-- Menu Item Body Start -->
+                                            <div class="menu-item-body">
+                                                <!-- Menu Item Title Start -->
+                                                <div class="menu-item-title">
+                                                    <h3>grilled veal filet</h3>
+                                                    <hr>
+                                                    <span>$16.00</span>
+                                                </div>
+                                                <!-- Menu Item Title End -->
+        
+                                                <!-- Menu Item Content Start -->
+                                                <div class="menu-item-content">
+                                                    <p>A perfect pairing of crispy, freshly made chips and rich, flavorful dips that bring a burst of taste in every bite.</p>
+                                                </div>
+                                                <!-- Menu Item Content End -->
+                                            </div>
+                                            <!-- Menu Item Body End -->
+                                        </div>
+                                        <!-- Our Menu Item End -->
+
+                                        <!-- Our Menu Item Start -->
+                                        <div class="menu-list-item">
+                                            <!-- Our Menu Image Start -->
+                                            <div class="menu-list-image">
+                                                <figure>
+                                                    <img src="{{ get_template_directory_uri() }}/resources/images/pricing-menu-4.png" alt="">
+                                                </figure>
+                                            </div>
+                                            <!-- Our Menu Image End -->
+        
+                                            <!-- Menu Item Body Start -->
+                                            <div class="menu-item-body">
+                                                <!-- Menu Item Title Start -->
+                                                <div class="menu-item-title">
+                                                    <h3>Mexican soup</h3>
+                                                    <hr>
+                                                    <span>$16.00</span>
+                                                </div>
+                                                <!-- Menu Item Title End -->
+        
+                                                <!-- Menu Item Content Start -->
+                                                <div class="menu-item-content">
+                                                    <p>A perfect pairing of crispy, freshly made chips and rich, flavorful dips that bring a burst of taste in every bite.</p>
+                                                </div>
+                                                <!-- Menu Item Content End -->
+                                            </div>
+                                            <!-- Menu Item Body End -->
+                                        </div>
+                                        <!-- Our Menu Item End -->
+                                    </div>
+                                    <!-- Our Menu List End -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Pricing Boxes End -->
+                        
+                        <!-- Pricing Boxes Start -->
+                        <div class="pricing-boxes tab-pane fade" id="drink" role="tabpanel">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6">
+                                    <!-- Pricing Image Start -->
+                                    <div class="pricing-image">
+                                        <figure class="image-anime">
+                                            <img src="{{ get_template_directory_uri() }}/resources/images/pricing-tab-image-4.jpg" alt="">
+                                        </figure>
+                                    </div>
+                                    <!-- Pricing Image End -->
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <!-- Our Menu List Start -->
+                                    <div class="our-menu-list">
+                                        <!-- Our Menu Item Start -->
+                                        <div class="menu-list-item">
+                                            <!-- Our Menu Image Start -->
+                                            <div class="menu-list-image">
+                                                <figure>
+                                                    <img src="{{ get_template_directory_uri() }}/resources/images/pricing-menu-1.png" alt="">
+                                                </figure>
+                                            </div>
+                                            <!-- Our Menu Image End -->
+        
+                                            <!-- Menu Item Body Start -->
+                                            <div class="menu-item-body">
+                                                <!-- Menu Item Title Start -->
+                                                <div class="menu-item-title">
+                                                    <h3>chips & dip</h3>
+                                                    <hr>
+                                                    <span>$16.00</span>
+                                                </div>
+                                                <!-- Menu Item Title End -->
+        
+                                                <!-- Menu Item Content Start -->
+                                                <div class="menu-item-content">
+                                                    <p>A perfect pairing of crispy, freshly made chips and rich, flavorful dips that bring a burst of taste in every bite.</p>
+                                                </div>
+                                                <!-- Menu Item Content End -->
+                                            </div>
+                                            <!-- Menu Item Body End -->
+                                        </div>
+                                        
+                                        <!-- Our Menu Item Start -->
+                                        <div class="menu-list-item">
+                                            <!-- Our Menu Image Start -->
+                                            <div class="menu-list-image">
+                                                <figure>
+                                                    <img src="{{ get_template_directory_uri() }}/resources/images/pricing-menu-2.png" alt="">
+                                                </figure>
+                                            </div>
+                                            <!-- Our Menu Image End -->
+        
+                                            <!-- Menu Item Body Start -->
+                                            <div class="menu-item-body">
+                                                <!-- Menu Item Title Start -->
+                                                <div class="menu-item-title">
+                                                    <h3>tender octopus</h3>
+                                                    <hr>
+                                                    <span>$16.00</span>
+                                                </div>
+                                                <!-- Menu Item Title End -->
+        
+                                                <!-- Menu Item Content Start -->
+                                                <div class="menu-item-content">
+                                                    <p>A perfect pairing of crispy, freshly made chips and rich, flavorful dips that bring a burst of taste in every bite.</p>
+                                                </div>
+                                                <!-- Our Menu Item End -->
+                                                <!-- Menu Item Content End -->
+                                            </div>
+                                            <!-- Menu Item Body End -->
+                                        </div>
+                                        <!-- Our Menu Item End -->
+                                        
+                                        <!-- Our Menu Item Start -->
+                                        <div class="menu-list-item">
+                                            <!-- Our Menu Image Start -->
+                                            <div class="menu-list-image">
+                                                <figure>
+                                                    <img src="{{ get_template_directory_uri() }}/resources/images/pricing-menu-3.png" alt="">
+                                                </figure>
+                                            </div>
+                                            <!-- Our Menu Image End -->
+        
+                                            <!-- Menu Item Body Start -->
+                                            <div class="menu-item-body">
+                                                <!-- Menu Item Title Start -->
+                                                <div class="menu-item-title">
+                                                    <h3>grilled veal filet</h3>
+                                                    <hr>
+                                                    <span>$16.00</span>
+                                                </div>
+                                                <!-- Menu Item Title End -->
+        
+                                                <!-- Menu Item Content Start -->
+                                                <div class="menu-item-content">
+                                                    <p>A perfect pairing of crispy, freshly made chips and rich, flavorful dips that bring a burst of taste in every bite.</p>
+                                                </div>
+                                                <!-- Menu Item Content End -->
+                                            </div>
+                                            <!-- Menu Item Body End -->
+                                        </div>
+                                        <!-- Our Menu Item End -->
+
+                                        <!-- Our Menu Item Start -->
+                                        <div class="menu-list-item">
+                                            <!-- Our Menu Image Start -->
+                                            <div class="menu-list-image">
+                                                <figure>
+                                                    <img src="{{ get_template_directory_uri() }}/resources/images/pricing-menu-4.png" alt="">
+                                                </figure>
+                                            </div>
+                                            <!-- Our Menu Image End -->
+        
+                                            <!-- Menu Item Body Start -->
+                                            <div class="menu-item-body">
+                                                <!-- Menu Item Title Start -->
+                                                <div class="menu-item-title">
+                                                    <h3>Mexican soup</h3>
+                                                    <hr>
+                                                    <span>$16.00</span>
+                                                </div>
+                                                <!-- Menu Item Title End -->
+        
+                                                <!-- Menu Item Content Start -->
+                                                <div class="menu-item-content">
+                                                    <p>A perfect pairing of crispy, freshly made chips and rich, flavorful dips that bring a burst of taste in every bite.</p>
+                                                </div>
+                                                <!-- Menu Item Content End -->
+                                            </div>
+                                            <!-- Menu Item Body End -->
+                                        </div>
+                                        <!-- Our Menu Item End -->
+                                    </div>
+                                    <!-- Our Menu List End -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Pricing Boxes End -->
+
+                        <div class="section-footer-text wow fadeInUp" data-wow-delay="0.2s">
+                            <p>craving the perfect brew? <a href="book-table.html">visit us today!</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Our Pricing Section End -->
+
+    <!-- Interactive Process Layout Start -->
+    <div class="interactive interactive-process-layout">
+        <!-- Interactive Process Wrapper Start -->
+        <div class="interactive-interactive-process-wrapper interactive-wrapper">
+            <div class="interactive-con">
+                <!-- Interactive Inner Grid Start -->
+                <div class="interactive-con-inner interactive-grid">
+                    <!-- Interactive Process Item Start -->
+                    <div class="interactive-process-item">
+                        <div class="interactive-inner-process activate" data-index="0">
+                            <div class="process-content-wap">
+                                <div class="process-inner-content-wap">
+                                    <p>Open for dining</p>
+                                    <h2><a href="#">Full catering</a></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Interactive Process Item End -->
+                    
+                    <!-- Interactive Process Item Start -->
+                    <div class="interactive-process-item">
+                        <div class="interactive-inner-process" data-index="1">
+                            <div class="process-content-wap">
+                                <div class="process-inner-content-wap">
+                                    <p>Rituals for focus, health & slowness</p>
+                                    <h2><a href="#">Tea selection</a></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Interactive Process Item End -->
+
+                    <!-- Interactive Process Item Start -->
+                    <div class="interactive-process-item">
+                        <div class="interactive-inner-process" data-index="2">
+                            <div class="process-content-wap">
+                                <div class="process-inner-content-wap">
+                                    <p>Book now</p>
+                                    <h2><a href="#">Private dining</a></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Interactive Process Item End -->
+                    
+                    <!-- Interactive Process Item Start -->
+                    <div class="interactive-process-item">
+                        <div class="interactive-inner-process" data-index="3">
+                            <div class="process-content-wap">
+                                <div class="process-inner-content-wap">
+                                    <p>Come's to diner now</p>
+                                    <h2><a href="#">Laguna beach</a></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Interactive Process Item End -->
+                </div>
+                <!-- Interactive Inner Grid End -->
+
+                <!-- Interactive Process Image Start -->
+                <div class="interactive-process-list-image">
+                    <div class="interactive-process-image img-0 show" data-bg="images/interactive-process-image-1.jpg" style="background-image: url('images/interactive-process-image-1.jpg');"></div>
+                    <div class="interactive-process-image img-1" data-bg="images/interactive-process-image-2.jpg" style="background-image: url('images/interactive-process-image-2.jpg');"></div>
+                    <div class="interactive-process-image img-2" data-bg="images/interactive-process-image-3.jpg" style="background-image: url('images/interactive-process-image-3.jpg');"></div>
+                    <div class="interactive-process-image img-3" data-bg="images/interactive-process-image-4.jpg" style="background-image: url('images/interactive-process-image-4.jpg');"></div>
+                </div>
+                <!-- Interactive Process Image End -->
+            </div>
+        </div>
+        <!-- Interactive Process Wrapper End -->
+    </div>
+    <!-- Interactive Process Layout End -->
+
+    <!-- Our Offers Section Start -->
+    <div class="our-offers">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <!-- Our Offers Content Start -->
+                    <div class="our-offers-content">
+                        <!-- Section Title Start -->
+                        <div class="section-title">
+                            <h3 class="wow fadeInUp">What we offer ?</h3>
+                            <h2 class="text-anime-style-3" data-cursor="-opaque">Host private events in an intimate setting</h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">We offer a warm and inviting space perfect for your private events. Whether it's a birthday celebration, a small gathering, or an exclusive business meeting</p>
+                        </div>
+                        <!-- Section Title End -->
+
+                        <!-- Offer Accordian Start -->
+                        <div class="offers-accordion" id="offer-accordion">
+                            <!-- Offer Accordian Item Start -->
+                            <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">
+                                <h2 class="accordion-header" id="offersheading1">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#offerscollapse1" aria-expanded="true" aria-controls="offerscollapse1">
+                                        Private dining room
+                                    </button>
+                                </h2>
+                                <div id="offerscollapse1" class="accordion-collapse collapse show" aria-labelledby="offersheading1" data-bs-parent="#offer-accordion">
+                                    <div class="accordion-body">
+                                        <p>Experience an elevated dining experience in our exclusive Private Dining Room.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Offer Accordian Item End -->
+                            
+                            <!-- Offer Accordian Item Start -->
+                            <div class="accordion-item wow fadeInUp" data-wow-delay="0.6s">
+                                <h2 class="accordion-header" id="offersheading2">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#offerscollapse2" aria-expanded="true" aria-controls="offerscollapse2">
+                                        Organize a wedding
+                                    </button>
+                                </h2>
+                                <div id="offerscollapse2" class="accordion-collapse collapse" aria-labelledby="offersheading2" data-bs-parent="#offer-accordion">
+                                    <div class="accordion-body">
+                                        <p>Experience an elevated dining experience in our exclusive Private Dining Room.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Offer Accordian Item End -->
+                            
+                            <!-- Offer Accordian Item Start -->
+                            <div class="accordion-item wow fadeInUp" data-wow-delay="0.8s">
+                                <h2 class="accordion-header" id="offersheading3">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#offerscollapse3" aria-expanded="true" aria-controls="offerscollapse3">
+                                        Birthday party
+                                    </button>
+                                </h2>
+                                <div id="offerscollapse3" class="accordion-collapse collapse" aria-labelledby="offersheading3" data-bs-parent="#offer-accordion">
+                                    <div class="accordion-body">
+                                        <p>Experience an elevated dining experience in our exclusive Private Dining Room.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Offer Accordian Item End -->
+                        </div>
+                        <!-- Offer Accordian End -->
+
+                        <!-- Offer Button Start -->
+                        <div class="offer-button wow fadeInUp" data-wow-delay="1s">
+                            <a href="book-table.html" class="btn-default">Schedule your event</a>
+                        </div>
+                        <!-- Offer Button End -->
+                    </div>
+                    <!-- Our Offers Content End -->
+                </div>
+                
+                <div class="col-lg-7">
+                    <!-- Our Offer Images Start -->
+                    <div class="our-offers-images">
+                        <!-- Offer Image Start -->
+                        <div class="offer-image">
+                            <figure class="image-anime">
+                                <img src="{{ get_template_directory_uri() }}/resources/images/offer-image.jpg" alt="">
+                            </figure>
+                        </div>
+                        <!-- Offer Image End -->
+                        
+                        <!-- Offer Circle Image 1 Start -->
+                        <div class="offer-circle-image-1">
+                            <figure class="image-anime">
+                                <img src="{{ get_template_directory_uri() }}/resources/images/offer-circle-image-1.jpg" alt="">
+                            </figure>
+                        </div>  
+                        <!-- Offer Circle Image 1 End -->
+                        
+                        <!-- Offer Circle Image 2 Start -->
+                        <div class="offer-circle-image-2">
+                            <figure class="image-anime">
+                                <img src="{{ get_template_directory_uri() }}/resources/images/offer-circle-image-2.jpg" alt="">
+                            </figure>
+                        </div>
+                        <!-- Offer Circle Image 2 End -->
+                    </div>
+                    <!-- Our Offer Images End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Our Offers Section End -->
+
+    <!-- About Restaurant Section Start -->
+    <div class="about-restaurant light-bg-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 order-lg-1 order-md-1">
+                    <!-- About Restaurant Content Start -->
+                    <div class="about-restaurant-content">
+                        <!-- Section Title Start -->
+                        <div class="section-title">
+                            <h3 class="wow fadeInUp">About restaurant</h3>
+                            <h2 class="text-anime-style-3" data-cursor="-opaque">Our philosophy</h2>
+                        </div>
+                        <!-- Section Title End -->
+
+                        <!-- About Restaurant Info Start -->
+                        <div class="about-restaurant-info">
+                            <h3 class="wow fadeInUp" data-wow-delay="0.2s">A place where food, design, and ambiance come together to create a experience.</h3>
+                            <p class="wow fadeInUp" data-wow-delay="0.4s">Experience Ray's incomparable outdoor riverside dining at Ray's on the river, along with scenic.</p>
+                            <p class="wow fadeInUp" data-wow-delay="0.6s">While social distancing is one of our top priorities, guests may still enjoy beautiful surrounding.</p>
+                        </div>
+                        <!-- About Restaurant Info End -->
+                        
+                        <!-- About Author Start -->
+                        <div class="about-author-box wow fadeInUp" data-wow-delay="0.8s">
+                            <img src="{{ get_template_directory_uri() }}/resources/images/author-signature.svg" alt="">
+                            <h3>johnathan - chef master</h3>
+                        </div>
+                        <!-- About Author End -->
+                    </div>
+                    <!-- About Restaurant Content End -->
+                </div>
+                
+                <div class="col-lg-4 order-lg-2 order-md-3">
+                    <!-- About Restaurant Image Start -->
+                    <div class="about-restaurant-image">
+                        <figure class="image-anime">
+                            <img src="{{ get_template_directory_uri() }}/resources/images/about-restaurant-img.jpg" alt="">
+                        </figure>
+                    </div>
+                    <!-- About Restaurant Image End -->
+                </div>
+                
+                <div class="col-lg-4 col-md-6 order-lg-3 order-md-2">
+                    <!-- Restaurant Timing Box Start -->
+                    <div class="restaurant-timing-box">
+                        <!-- Section Title Start -->
+                        <div class="section-title">
+                            <h3 class="wow fadeInUp">Time of luxury</h3>
+                            <h2 class="text-anime-style-3" data-cursor="-opaque">open hour time</h2>
+                        </div>
+                        <!-- Section Title End -->
+                        
+                        <!-- Restaurant Timing Body Start -->
+                        <div class="restaurant-time-body">
+                            <h3 class="wow fadeInUp" data-wow-delay="0.2s">Come and experience the classy atmosphere with delicious food and music.</h3>
+                            <ul class="wow fadeInUp" data-wow-delay="0.4s">
+                                <li>Monday - Friday : 9.00am — 22.00pm</li>
+                                <li>Saturday: 10.00am — 23.00pm</li>
+                                <li>Sunday: 5.00pm — 23.00pm</li>
+                                <li>Holidays: Closed</li>
+                                <li>Happy Hour: 18.00 pm — 20.00pm</li>
+                            </ul>
+                            <h3 class="wow fadeInUp" data-wow-delay="0.6s">“ On holidays is a special day, we will open and with special offer, we will announce! “</h3>
+                        </div>
+                        <!-- Restaurant Timing Body End -->
+                    </div>
+                    <!-- Restaurant Timing Box End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Restaurant Section End -->
+
+    <!-- Our Testimonials Section Start -->
+    <div class="our-testimonials parallaxie">
+        <div class="container">
+            <div class="row section-row">
+                <div class="col-lg-12">
+                    <!-- Section Title Start -->
+                    <div class="section-title">
+                        <h3 class="wow fadeInUp">our testimonials</h3>
+                        <h2 class="text-anime-style-3" data-cursor="-opaque">Hear from those who know us best</h2>
+                    </div>
+                    <!-- Section Title End -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Testimonial Slider Start -->
+                    <div class="testimonial-slider">
+                        <div class="swiper">
+                            <div class="swiper-wrapper" data-cursor-text="Drag">
+                                <!-- Testimonial Slide Start -->
+                                <div class="swiper-slide">
+                                    <div class="testimonial-item">
+                                        <div class="testimonial-content">
+                                            <p>“ From the moment I contacted them, I knew I was in good hands. The property exceeded all my expectations, and the team's expertise made the entire buying experience seamless. </p>
+                                        </div>
+                                        <div class="author-info">
+                                            <p>leslie alexander, ukco - united kingdom co.</p>
+                                        </div>                                    
+                                    </div>
+                                </div>
+                                <!-- Testimonial Slide End -->
+                    
+                                <!-- Testimonial Slide Start -->
+                                <div class="swiper-slide">
+                                    <div class="testimonial-item">
+                                        <div class="testimonial-content">
+                                            <p>“ From the moment I contacted them, I knew I was in good hands. The property exceeded all my expectations, and the team's expertise made the entire buying experience seamless. </p>
+                                        </div>
+                                        <div class="author-info">
+                                            <p>ukco - united kingdom co.</p>
+                                        </div>                                    
+                                    </div>
+                                </div>
+                                <!-- Testimonial Slide End -->                              
+                            </div>
+                            <div class="testimonial-btn">
+                                <div class="testimonial-btn-prev"></div>
+                                <div class="testimonial-btn-next"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial Slider End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Our Testimonials Section End -->
+
+    <!-- CTA Box Section Start -->
+    <div class="cta-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- CTA Box Content Start -->
+                    <div class="cta-box-content">
+                        <!-- Section Title Start -->
+                        <div class="section-title">
+                            <h3 class="wow fadeInUp">Coffee at your fingertips</h3>
+                            <h2 class="text-anime-style-3" data-cursor="-opaque">Download our mobile app</h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">Stay connected with Roast wherever you go. With our mobile app, you can browse the menu, place orders, schedule pickups, and enjoy exclusive rewards — all from the convenience of your phone. Download and bring your favorite coffee.</p>
+                        </div>
+                        <!-- Section Title End -->
+                        
+                        <!-- CTA Box Buttons Start -->
+                        <div class="cta-box-buttons wow fadeInUp" data-wow-delay="0.4s">
+                            <a href="#" class="btn-default"><i class="fa-brands fa-app-store-ios"></i> App Store</a>
+                            <a href="#" class="btn-default"><i class="fa-brands fa-google-play"></i> Google Play</a>
+                        </div>
+                        <!-- CTA Box Buttons End -->
+                    </div>
+                    <!-- CTA Box Content End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CTA Box Section End -->
+
+    <!-- Main Footer Section Start -->
+    <footer class="main-footer parallaxie">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Footer Contact List Start -->
+                    <div class="footer-contact-list">
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-contact-item">
+                            <div class="icon-box">
+                                <img src="{{ get_template_directory_uri() }}/resources/images/icon-phone-accent.svg" alt="">
+                            </div>
+                            <div class="footer-contact-detail">
+                                <h3>contact us</h3>
+                                <p>T. <a href="tel:+123456789">+123 456 789</a></p>
+                                <p>M. <a href="mainto:info@domainname.com">info@domainname.com</a></p>
+                            </div>
+                            <div class="footer-contact-button">
+                                <a href="contact.html" class="btn-default btn-highlighted">contact us</a>
+                            </div>
+                        </div>
+                        <!-- Footer Contact Item End -->
+                        
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-contact-item">
+                            <div class="icon-box">
+                                <img src="{{ get_template_directory_uri() }}/resources/images/icon-location-accent.svg" alt="">
+                            </div>
+                            <div class="footer-contact-detail">
+                                <h3>address</h3>
+                                <p>29721 Westheimer Road, Santa Ana, Illinois 85486</p>
+                            </div>
+                            <div class="footer-contact-button">
+                                <a href="contact.html" class="btn-default btn-highlighted">get direction</a>
+                            </div>
+                        </div>
+                        <!-- Footer Contact Item End -->
+                        
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-contact-item">
+                            <div class="icon-box">
+                                <img src="{{ get_template_directory_uri() }}/resources/images/icon-clock-accent.svg" alt="">
+                            </div>
+                            <div class="footer-contact-detail">
+                                <h3>opening hours</h3>
+                                <p>Everyday: From 12.30 To 23.00</p>
+                                <p>Kitchen Closes At 22.00</p>
+                            </div>
+                            <div class="footer-contact-button">
+                                <a href="book-table.html" class="btn-default btn-highlighted">reserve a table</a>
+                            </div>
+                        </div>
+                        <!-- Footer Contact Item End -->
+                    </div>
+                    <!-- Footer Contact List End -->
+                </div>
+
+                <div class="col-lg-12">
+                    <!-- Footer Copyright Start -->
+                    <div class="footer-copyright">
+                        <!-- Footer Copyright Text Start -->
+                        <div class="footer-copyright-text order-md-1 order-3">
+                            <p>Copyright © 2025 All Rights Reserved.</p>
+                        </div>
+                        <!-- Footer Copyright Text End -->
+                        
+                        <!-- Footer Logo Start -->
+                        <div class="footer-logo order-md-2 order-1">
+                            <img src="{{ get_template_directory_uri() }}/resources/images/footer-logo.svg" alt="">
+                        </div>
+                        <!-- Footer Logo End -->
+                        
+                        <!-- Footer Social Links Start -->
+                        <div class="footer-social-links order-md-3 order-2">
+                            <ul>
+                                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-dribbble"></i></a></li>
+                            </ul>
+                        </div>
+                        <!-- Footer Social Links End -->
+                    </div>
+                    <!-- Footer Copyright End -->
+                </div>
+            </div>
+        </div>
+    </footer>
 @endsection
 
 @push('scripts')
