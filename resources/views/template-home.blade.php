@@ -26,7 +26,7 @@
                 
                 @if($primary_button && is_array($primary_button))
                   <a 
-                    href="{{ $primary_button['url'] ?? '#' }}" 
+                    href="{{ esc_url($primary_button['url'] ?? '#') }}" 
                     class="btn-default"
                     {!! isset($primary_button['target']) && $primary_button['target'] ? 'target="_blank"' : '' !!}
                   >
@@ -36,7 +36,7 @@
                 
                 @if($secondary_button && is_array($secondary_button))
                   <a 
-                    href="{{ $secondary_button['url'] ?? '#' }}" 
+                    href="{{ esc_url($secondary_button['url'] ?? '#') }}" 
                     class="btn-default btn-highlighted"
                     {!! isset($secondary_button['target']) && $secondary_button['target'] ? 'target="_blank"' : '' !!}
                   >
@@ -96,15 +96,30 @@
               </div>
 
               <div class="about-us-footer wow fadeInUp" data-wow-delay="0.6s">
-                @if($about_button = get_field('about_button'))
+                @php
+                  $about_button = get_field('about_button');
+                  $video_url = get_field('about_video_url');
+                @endphp
+
+                @if($about_button && is_array($about_button))
                   <div class="about-btn">
-                    <a href="{{ $about_button['url'] }}" class="btn-default">{{ $about_button['title'] }}</a>
+                    <a 
+                      href="{{ esc_url($about_button['url'] ?? '#') }}" 
+                      class="btn-default"
+                      {!! isset($about_button['target']) && $about_button['target'] ? 'target="_blank"' : '' !!}
+                    >
+                      {{ $about_button['title'] ?? 'Learn More' }}
+                    </a>
                   </div>
                 @endif
                 
-                @if($video_url = get_field('about_video_url'))
+                @if($video_url)
                   <div class="video-play-button">
-                    <a href="{{ $video_url }}" class="popup-video" data-cursor-text="Play">
+                    <a 
+                      href="{{ esc_url($video_url) }}" 
+                      class="popup-video" 
+                      data-cursor-text="Play"
+                    >
                       <i class="fa-solid fa-play"></i>
                     </a>
                     <p>watch video</p>
@@ -180,6 +195,7 @@
   }
 </script>
 @endpush
+
 
 
 
