@@ -167,8 +167,14 @@ $home
         'default_value' => 'Step into the aroma of freshly coffee',
     ])
     ->addTextarea('hero_description')
-    ->addLink('hero_primary_button')
-    ->addLink('hero_secondary_button')
+    ->addLink('hero_primary_button', [
+        'label' => 'Primary Button',
+        'return_format' => 'array',
+    ])
+    ->addLink('hero_secondary_button', [
+        'label' => 'Secondary Button',
+        'return_format' => 'array',
+    ])
     ->addRepeater('coffee_items', [
         'label' => 'Coffee Items',
         'layout' => 'table',

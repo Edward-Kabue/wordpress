@@ -19,11 +19,15 @@
               </div>
               
               <div class="hero-btn wow fadeInUp" data-wow-delay="0.4s">
-                @if($primary_button = get_field('hero_primary_button'))
-                  <a href="{{ $primary_button['url'] }}" class="btn-default">{{ $primary_button['title'] }}</a>
+                @if($primary_button)
+                  <a href="{{ $primary_button['url'] ?? '#' }}" class="btn-default" {!! $primary_button['target'] ? 'target="' . $primary_button['target'] . '"' : '' !!}>
+                    {{ $primary_button['title'] ?? 'Learn More' }}
+                  </a>
                 @endif
-                @if($secondary_button = get_field('hero_secondary_button'))
-                  <a href="{{ $secondary_button['url'] }}" class="btn-default btn-highlighted">{{ $secondary_button['title'] }}</a>
+                @if($secondary_button)
+                  <a href="{{ $secondary_button['url'] ?? '#' }}" class="btn-default btn-highlighted" {!! $secondary_button['target'] ? 'target="' . $secondary_button['target'] . '"' : '' !!}>
+                    {{ $secondary_button['title'] ?? 'Book a Table' }}
+                  </a>
                 @endif
               </div>
             </div>
@@ -162,6 +166,7 @@
   }
 </script>
 @endpush
+
 
 
 
