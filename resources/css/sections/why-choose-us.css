@@ -1,0 +1,38 @@
+.why-choose-us {
+  padding: 100px 0;
+  background: var(--background-color);
+}
+
+.why-choose-us .features-grid {
+  margin-top: 60px;
+}
+
+.why-choose-us .feature-item {
+  text-align: center;
+  padding: 30px;
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+}
+
+.why-choose-us .feature-item:hover {
+  transform: translateY(-10px);
+}
+
+.why-choose-us .feature-item .icon-box {
+  margin-bottom: 20px;
+}
+
+.why-choose-us .feature-item .icon-box img {
+  width: 60px;
+  height: auto;
+}
+
+.why-choose-us .feature-item h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.why-choose-us .feature-item p {
+  color: var(--text-color);
+  margin: 0;
+}

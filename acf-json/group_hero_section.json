@@ -1,0 +1,317 @@
+{
+    "key": "group_hero_section",
+    "title": "Hero Section",
+    "fields": [
+        {
+            "key": "field_hero_type",
+            "label": "Hero Type",
+            "name": "hero_type",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "simple": "Simple Background",
+                "video": "Video Background",
+                "slider": "Image Slider"
+            },
+            "default_value": "simple",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "return_format": "value"
+        },
+        {
+            "key": "field_hero_background",
+            "label": "Background Image",
+            "name": "hero_background",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_hero_type",
+                        "operator": "==",
+                        "value": "simple"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": 0,
+            "min_height": 0,
+            "min_size": 0,
+            "max_width": 0,
+            "max_height": 0,
+            "max_size": 0,
+            "mime_types": ""
+        },
+        {
+            "key": "field_hero_video",
+            "label": "Background Video",
+            "name": "hero_video",
+            "aria-label": "",
+            "type": "file",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_hero_type",
+                        "operator": "==",
+                        "value": "video"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "mime_types": "mp4,webm",
+            "library": "all",
+            "min_size": 0,
+            "max_size": 0
+        },
+        {
+            "key": "field_hero_slides",
+            "label": "Slider Images",
+            "name": "hero_slides",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_hero_type",
+                        "operator": "==",
+                        "value": "slider"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "min": 1,
+            "max": 5,
+            "sub_fields": [
+                {
+                    "key": "field_slide_image",
+                    "label": "Slide Image",
+                    "name": "image",
+                    "type": "image",
+                    "return_format": "url",
+                    "preview_size": "medium"
+                }
+            ]
+        },
+        {
+            "key": "field_hero_subtitle",
+            "label": "Subtitle",
+            "name": "hero_subtitle",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "crafted with love, served with passion",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_hero_title",
+            "label": "Title",
+            "name": "hero_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Step into the aroma of freshly coffee",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_hero_description",
+            "label": "Description",
+            "name": "hero_description",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 4,
+            "default_value": "Discover a place where every cup is a masterpiece, crafted with passion and precision. From the rich, bold flavors of our signature blends to the cozy ambiance that feels like home.",
+            "new_lines": "",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_hero_primary_button",
+            "label": "Primary Button",
+            "name": "hero_primary_button",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "sub_fields": [
+                {
+                    "key": "field_primary_button_text",
+                    "label": "Text",
+                    "name": "text",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "Discover coffee",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_primary_button_link",
+                    "label": "Link",
+                    "name": "link",
+                    "aria-label": "",
+                    "type": "link",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "url"
+                }
+            ],
+            "layout": "block"
+        },
+        {
+            "key": "field_hero_secondary_button",
+            "label": "Secondary Button",
+            "name": "hero_secondary_button",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "sub_fields": [
+                {
+                    "key": "field_secondary_button_text",
+                    "label": "Text",
+                    "name": "text",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "book a table",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_secondary_button_link",
+                    "label": "Link",
+                    "name": "link",
+                    "aria-label": "",
+                    "type": "link",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "url"
+                }
+            ],
+            "layout": "block"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "template-home.blade.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Hero section configuration with support for simple background, video, and slider layouts",
+    "show_in_rest": false,
+    "modified": 1745403202
+}
