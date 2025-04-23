@@ -1,72 +1,37 @@
-@php
-$heroType = get_field('hero_type') ?? 'simple';
-$heroClass = match($heroType) {
-    'video' => 'hero-video',
-    'slider' => 'hero-slider-layout',
-    default => ''
-};
-@endphp
-
-<div class="hero {{ $heroClass }}">
-    @if($heroType === 'simple')
-        @if($background = get_field('hero_background'))
-            <style>
-                .hero { 
-                    background-image: url('{{ $background }}');
-                    background-size: cover;
-                    background-position: center;
-                }
-            </style>
-        @endif
-    @endif
-
+<div class="hero parallaxie">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-8 col-md-10">
-                <div class="hero-content text-white">
-                    @if($subtitle = get_field('hero_subtitle'))
-                        <div class="hero-tagline text-sm uppercase tracking-wider mb-4">
-                            <i class="fas fa-coffee mr-2"></i>{{ $subtitle }}
-                        </div>
-                    @endif
-                    
-                    @if($title = get_field('hero_title'))
-                        <h1 class="text-6xl font-serif mb-6 leading-tight">{{ $title }}</h1>
-                    @endif
-                    
-                    @if($description = get_field('hero_description'))
-                        <p class="text-lg opacity-90 mb-8 max-w-2xl">{{ $description }}</p>
-                    @endif
-                    
-                    <div class="hero-buttons flex gap-4">
-                        @if($primaryButton = get_field('hero_primary_button'))
-                            <a href="{{ $primaryButton['link'] }}" class="btn-primary bg-[#C8A27A] hover:bg-[#B69068] text-white px-8 py-3 rounded-full transition duration-300">
-                                {{ $primaryButton['text'] }}
-                            </a>
-                        @endif
-                        
-                        @if($secondaryButton = get_field('hero_secondary_button'))
-                            <a href="{{ $secondaryButton['link'] }}" class="btn-secondary border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition duration-300">
-                                {{ $secondaryButton['text'] }}
-                            </a>
-                        @endif
+                <!-- Hero Content Start -->
+                <div class="hero-content">
+                    <!-- Section Title Start -->
+                    <div class="section-title">
+                        <h3 class="wow fadeInUp">
+                            {{ get_field('hero_subtitle') ?: 'crafted with love, served with passion' }}
+                        </h3>
+                        <h1 class="text-anime-style-3" data-cursor="-opaque">
+                            {{ get_field('hero_title') ?: 'Step into the aroma of freshly coffee' }}
+                        </h1>
+                        <p class="wow fadeInUp" data-wow-delay="0.2s">
+                            {{ get_field('hero_description') ?: 'Discover a place where every cup is a masterpiece, crafted with passion and precision. From the rich, bold flavors of our signature blends to the cozy ambiance that feels like home.' }}
+                        </p>
                     </div>
+                    <!-- Section Title End -->
+                    
+                    <!-- Hero Button Start -->
+                    <div class="hero-btn wow fadeInUp" data-wow-delay="0.4s">
+                        <a href="{{ get_field('discover_coffee_link') ?: 'about.html' }}" class="btn-default">
+                            {{ get_field('discover_coffee_text') ?: 'Discover coffee' }}
+                        </a>
+                        <a href="{{ get_field('book_table_link') ?: 'book-table.html' }}" class="btn-default btn-highlighted">
+                            {{ get_field('book_table_text') ?: 'book a table' }}
+                        </a>
+                    </div>
+                    <!-- Hero Button End -->
                 </div>
+                <!-- Hero Content End -->
             </div>
         </div>
     </div>
 </div>
-
-<div class="scrolling-text bg-[#C8A27A] py-4 overflow-hidden">
-    <div class="scroll-wrapper">
-        <div class="scroll-content flex animate-scroll whitespace-nowrap">
-            @foreach(['CAPPUCCINO', 'MOCHA', 'MACCHIATO', 'COLD BREW', 'ESPRESSO', 'AMERICANO', 'LATTE'] as $item)
-                <span class="mx-4 text-white">{{ $item }}</span>
-                <span class="text-white mx-2">★</span>
-            @endforeach
-        </div>
-    </div>
-</div>
-
-
 
