@@ -9,6 +9,22 @@ namespace App;
 use Illuminate\Support\Facades\Vite;
 
 /**
+ * Theme assets
+ */
+add_action('wp_enqueue_scripts', function () {
+    // Dequeue WordPress core block styles to prevent conflicts
+    wp_dequeue_style('wp-block-library');
+    wp_dequeue_style('wp-block-library-theme');
+    
+    // Re-enqueue them properly
+    wp_enqueue_style('wp-block-library');
+    wp_enqueue_style('wp-block-library-theme');
+    
+    // Register theme stylesheet with dependencies
+    wp_register_style('sage/app', false, ['wp-block-library', 'wp-block-library-theme']);
+}, 100);
+
+/**
  * Inject styles into the block editor.
  *
  * @return array
@@ -94,40 +110,28 @@ add_action('after_setup_theme', function () {
     add_theme_support('title-tag');
 
     /**
-     * Enable post thumbnail support.
-     *
+     * Enable support for Elementor
+     */
+    add_theme_support('elementor');
+
+    /**
+     * Enable full Gutenberg support
+     */
+    add_theme_support('align-wide');
+    add_theme_support('responsive-embeds');
+    add_theme_support('editor-styles');
+    add_theme_support('wp-block-styles');
+
+    /**
+     * Enable support for Post Thumbnails on posts and pages.
      * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
      */
     add_theme_support('post-thumbnails');
 
     /**
-     * Enable responsive embed support.
-     *
-     * @link https://developer.wordpress.org/block-editor/how-to-guides/themes/theme-support/#responsive-embedded-content
+     * Enable shortcode support in widgets
      */
-    add_theme_support('responsive-embeds');
-
-    /**
-     * Enable HTML5 markup support.
-     *
-     * @link https://developer.wordpress.org/reference/functions/add_theme_support/#html5
-     */
-    add_theme_support('html5', [
-        'caption',
-        'comment-form',
-        'comment-list',
-        'gallery',
-        'search-form',
-        'script',
-        'style',
-    ]);
-
-    /**
-     * Enable selective refresh for widgets in customizer.
-     *
-     * @link https://developer.wordpress.org/reference/functions/add_theme_support/#customize-selective-refresh-widgets
-     */
-    add_theme_support('customize-selective-refresh-widgets');
+    add_filter('widget_text', 'do_shortcode');
 }, 20);
 
 /**
@@ -153,3 +157,5 @@ add_action('widgets_init', function () {
         'id' => 'sidebar-footer',
     ] + $config);
 });
+
+

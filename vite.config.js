@@ -19,8 +19,6 @@ export default defineConfig({
 
     wordpressPlugin(),
 
-    // Generate the theme.json file in the public/build/assets directory
-    // based on the Tailwind config and the theme.json file from base theme folder
     wordpressThemeJson({
       disableTailwindColors: false,
       disableTailwindFonts: false,
@@ -35,4 +33,16 @@ export default defineConfig({
       '@images': '/resources/images',
     },
   },
+  build: {
+    manifest: true,
+    outDir: 'public/build',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          editor: ['resources/js/editor.js'],
+        },
+      },
+    },
+  },
 })
+

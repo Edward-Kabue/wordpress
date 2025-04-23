@@ -1,3 +1,50 @@
 @import "tailwindcss" theme(static);
 @source "../views/";
 @source "../../app/";
+
+/* Preserve WordPress admin bar styling */
+html {
+  margin-top: 32px !important;
+}
+
+@media screen and (max-width: 782px) {
+  html {
+    margin-top: 46px !important;
+  }
+}
+
+/* Ensure proper styling for WordPress generated classes */
+.alignnone {
+  margin: 5px 20px 20px 0;
+}
+
+.aligncenter {
+  display: block;
+  margin: 5px auto 5px auto;
+}
+
+.alignright {
+  float: right;
+  margin: 5px 0 20px 20px;
+}
+
+.alignleft {
+  float: left;
+  margin: 5px 20px 20px 0;
+}
+
+.wp-caption {
+  max-width: 100%;
+}
+
+.wp-caption-text {
+  font-size: 0.875rem;
+  font-style: italic;
+  margin: 0.5rem 0;
+}
+
+/* Preserve block editor styles */
+.wp-block {
+  max-width: none;
+}
+
