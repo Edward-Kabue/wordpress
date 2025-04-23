@@ -24,13 +24,22 @@
                   $secondary_button = get_field('hero_secondary_button');
                 @endphp
                 
-                @if($primary_button)
-                  <a href="{{ $primary_button['url'] ?? '#' }}" class="btn-default" {!! $primary_button['target'] ? 'target="' . $primary_button['target'] . '"' : '' !!}>
+                @if($primary_button && is_array($primary_button))
+                  <a 
+                    href="{{ $primary_button['url'] ?? '#' }}" 
+                    class="btn-default"
+                    {!! isset($primary_button['target']) && $primary_button['target'] ? 'target="_blank"' : '' !!}
+                  >
                     {{ $primary_button['title'] ?? 'Learn More' }}
                   </a>
                 @endif
-                @if($secondary_button)
-                  <a href="{{ $secondary_button['url'] ?? '#' }}" class="btn-default btn-highlighted" {!! $secondary_button['target'] ? 'target="' . $secondary_button['target'] . '"' : '' !!}>
+                
+                @if($secondary_button && is_array($secondary_button))
+                  <a 
+                    href="{{ $secondary_button['url'] ?? '#' }}" 
+                    class="btn-default btn-highlighted"
+                    {!! isset($secondary_button['target']) && $secondary_button['target'] ? 'target="_blank"' : '' !!}
+                  >
                     {{ $secondary_button['title'] ?? 'Book a Table' }}
                   </a>
                 @endif
@@ -171,6 +180,7 @@
   }
 </script>
 @endpush
+
 
 
 
