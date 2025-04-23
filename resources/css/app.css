@@ -1,48 +1,5 @@
-
-@tailwind utilities;
-
-/* ----------------------------------------------------------------------------------------
-* Author        : Awaiken
-* Template Name : Roast - Coffee Shop & Cafe HTML Template
-* File          : CSS File
-* Version       : 1.0
-* ---------------------------------------------------------------------------------------- */
-/* INDEX
-----------------------------------------------------------------------------------------
-01. Global Variables
-02. General css
-03. Header css
-04. Hero css
-05. Scrolling Ticker css
-06. About Us css
-07. Why Choose Us css
-08. Intro Video css
-09. Our Pricing css
-10. Interactive Process css
-11. Our Offers css
-12. About Restaurant css
-13. Our Testimonials css
-14. CTA Box css
-15. Footer css
-16. About Us Page css
-17. Services Page css
-18. Service Single css
-19. Menu Page css
-20. Blog Archive css
-21. Blog Single css
-22. Projects Page css
-23. Projects Single css
-24. Team Page css
-25. Team Single css
-26. Image Gallery css
-27. Video Gallery css
-28. FAQs Page css
-29. Contact Us Page css
-30. Book Table Page css
-31. 404 Error Page css
-32. Responsive css
--------------------------------------------------------------------------------------- */
-
+/* Import Bootstrap */
+@import 'bootstrap.min.css';
 /************************************/
 /*** 	 01. Global Variables	  ***/
 /************************************/	
@@ -1194,7 +1151,6 @@ body:has(.offcanvas){
 
 .about-us-content{
 	margin-right: 50px;
-	width: 50%;
 }
 
 .about-body-item{
@@ -1326,21 +1282,6 @@ body:has(.offcanvas){
 		transform: scale(1);
 		opacity: 0;
 	}
-}
-
-@keyframes fadeIn {
-    from { 
-        opacity: 0; 
-        transform: translateY(20px); 
-    }
-    to { 
-        opacity: 1; 
-        transform: translateY(0); 
-    }
-}
-
-.animate-fadeIn {
-    animation: fadeIn 0.8s ease-out forwards;
 }
 
 .video-play-button i{
@@ -4639,7 +4580,7 @@ body:has(.offcanvas){
 	.about-body-item .icon-box img{
 		max-width: 25px;
 	}
-
+	
 	.about-body-list-content{
 		width: calc(100% - 65px);
 	}
@@ -4654,7 +4595,7 @@ body:has(.offcanvas){
 	}
 
 	.about-us-image{
-		width: 50%;
+		width: 100%;
 		max-width: 75%;
 		margin: 0 auto;
 		padding-left: 90px;

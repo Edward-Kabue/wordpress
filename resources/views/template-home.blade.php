@@ -77,48 +77,42 @@
     <!-- Scrolling Ticker Section End -->
 
     <!-- About us Section Start -->
-    <div class="about-us bg-[#0d1520] text-white py-24">
-        <div class="container mx-auto px-4 md:px-16">
-            <div class="grid md:grid-cols-2 items-center">
-                
-                <div >
+    <div class="about-us">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- About us Content - Now on the left -->
+                <div class="col-lg-6 col-md-10 order-2 order-lg-1">
                     <!-- About us Content Start -->
                     <div class="about-us-content">
                         <!-- Section Title Start -->
-                        <div class="section-title mb-12">
-                            <div class="flex items-center gap-2 mb-4">
-                            
-                                <h3 class="text-[#E6C9A1] font-medium wow fadeInUp">About Us</h3>
-                            </div>
-                            <h2 class="text-4xl md:text-5xl font-serif tracking-wide leading-tight text-anime-style-3" data-cursor="-opaque">
-                                BRINGING PEOPLE TOGETHER,<br>
-                                ONE CUP AT A TIME
-                            </h2>
+                        <div class="section-title">
+                            <h3 class="wow fadeInUp">about us</h3>
+                            <h2 class="text-anime-style-3" data-cursor="-opaque">Bringing people together, one cup at a time</h2>
                         </div>
                         <!-- Section Title End -->
                          
                         <!-- About Body List Start -->
-                        <div class="about-body-list space-y-8">
+                        <div class="about-body-list">
                             <!-- About Body Item Start -->
-                            <div class="about-body-item flex wow fadeInUp" data-wow-delay="0.2s">
-                                <div class="icon-box bg-[#1a2633] rounded-full p-4 h-16 w-16 flex items-center justify-center flex-shrink-0 mr-8">
-                                    <img src="{{ get_template_directory_uri() }}/resources/images/icon-about-body-item-1.svg" alt="" class="w-8 h-8">
+                            <div class="about-body-item wow fadeInUp" data-wow-delay="0.2s">
+                                <div class="icon-box">
+                                    <img src="{{ get_template_directory_uri() }}/resources/images/icon-about-body-item-1.svg" alt="">
                                 </div>
                                 <div class="about-body-list-content">
-                                    <h3 class="text-xl font-medium mb-2">Food Delivery</h3>
-                                    <p class="text-gray-400">With our fast and reliable food delivery service, your favorite coffee, snacks, and treats are just a click away.</p>
+                                    <h3>Food delivery</h3>
+                                    <p>With our fast and reliable food delivery service, your favorite coffee, snacks, and treats are just a click away.</p>
                                 </div>
                             </div>
                             <!-- About Body Item End -->
                             
                             <!-- About Body Item Start -->
-                            <div class="about-body-item flex wow fadeInUp" data-wow-delay="0.4s">
-                                <div class="icon-box bg-[#1a2633] rounded-full p-4 h-16 w-16 flex items-center justify-center flex-shrink-0 mr-8">
-                                    <img src="{{ get_template_directory_uri() }}/resources/images/icon-about-body-item-2.svg" alt="" class="w-8 h-8">
+                            <div class="about-body-item wow fadeInUp" data-wow-delay="0.4s">
+                                <div class="icon-box">
+                                    <img src="{{ get_template_directory_uri() }}/resources/images/icon-about-body-item-2.svg" alt="">
                                 </div>
                                 <div class="about-body-list-content">
-                                    <h3 class="text-xl font-medium mb-2">Event Elegance</h3>
-                                    <p class="text-gray-400">Host your special moments with us! From intimate gatherings to vibrant celebrations offers.</p>
+                                    <h3>Event elegance</h3>
+                                    <p>Host your special moments with us! From intimate gatherings to vibrant celebrations offers.</p>
                                 </div>
                             </div>
                             <!-- About Body Item End -->
@@ -126,58 +120,61 @@
                         <!-- About Body List End -->
                         
                         <!-- About Us Footer Start -->
-                        <div class="about-us-footer mt-16 wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="flex items-center gap-8">
-                                <!-- About Button Start -->
-                                <div class="about-btn">
-                                    <a href="about.html" class="btn-default bg-[#E6C9A1] hover:bg-[#d4b78f] text-[#0d1520] px-6 py-3 rounded-full font-medium transition-colors inline-block">More About Us</a>
-                                </div>
-                                <!-- About Button End -->
-                               
+                        <div class="about-us-footer wow fadeInUp" data-wow-delay="0.6s">
+                            <!-- About Button Start -->
+                            <div class="about-btn">
+                                <a href="about.html" class="btn-default">More about us</a>
                             </div>
+                            <!-- About Button End -->
+                            
+                            <!-- Video Play Button Start -->
+                            <div class="video-play-button">
+                                <a href="https://www.youtube.com/watch?v=Y-x0efG1seA" class="popup-video" data-cursor-text="Play">
+                                    <i class="fa-solid fa-play"></i>
+                                </a>
+                                <p>watch video</p>
+                            </div>
+                            <!-- Video Play Button End -->
                         </div>
                         <!-- About Us Footer End -->
                     </div>
                     <!-- About us Content End -->
                 </div>
-    
-                <div>
+
+                <!-- About Us Image - Now on the right -->
+                <div class="col-lg-6 order-1 order-lg-2">
                     <!-- About Us Image Start -->
                     <div class="about-us-image">
+                        <!-- About Us Image Start -->
                         <div class="about-us-img">
-                            <figure class="image-anime rounded-full overflow-hidden aspect-square">
-                                <img src="{{ get_template_directory_uri() }}/resources/images/about-us-image.jpg" alt="" class="w-full h-full object-cover">
+                            <figure class="image-anime">
+                                <img src="{{ get_template_directory_uri() }}/resources/images/about-us-image.jpg" alt="">
                             </figure>
                         </div>
+                        <!-- About Us Image End -->
                         
                         <!-- Opening Time Box Start -->
-                        <div class="opening-time-box absolute bottom-12 -left-4 md:bottom-16 md:-left-16 bg-[#E6C9A1] text-[#0d1520] p-6 rounded-lg max-w-xs">
-                            <div class="flex items-center gap-2 mb-4">
-                                <div class="icon-box bg-[#0d1520] rounded-full p-2 w-10 h-10 flex items-center justify-center">
-                                    <i class="fa-regular fa-clock text-[#E6C9A1]"></i>
-                                </div>
-                                <h3 class="font-medium text-lg">Open Hours</h3>
+                        <div class="opening-time-box">
+                            <!-- Icon Box Start -->
+                            <div class="icon-box">
+                                <i class="fa-regular fa-clock"></i>
                             </div>
+                            <!-- Icon Box End -->
+                            
+                            <!-- Opening Time Content Start -->
                             <div class="opening-time-content">
-                                <ul class="space-y-2">
-                                    <li class="flex justify-between">
-                                        <span>Monday - Friday</span>
-                                        <span>09:30 - 7:30</span>
-                                    </li>
-                                    <li class="flex justify-between">
-                                        <span>Saturday</span>
-                                        <span>10:30 - 5:00</span>
-                                    </li>
-                                    <li class="flex justify-between">
-                                        <span>Sunday</span>
-                                        <span>24 hours open</span>
-                                    </li>
+                                <h3>Open hours</h3>
+                                <ul>
+                                    <li>Monday - Friday<span>09:30 - 7:30</span></li>
+                                    <li>Saturday<span>10:30 - 5:00</span></li>
+                                    <li>Sunday<span>24 hours open</span></li>
                                 </ul>
                             </div>
+                            <!-- Opening Time Content End -->
                         </div>
-                        <!-- Opening Time Box End -->
+                        <!-- About Menu Box End -->
                     </div>
-                    <!-- About Us Image End -->
+                    <!-- Opening Time Box End -->
                 </div>
             </div>
         </div>

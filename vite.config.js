@@ -1,11 +1,9 @@
 import { defineConfig } from 'vite'
-import tailwindcss from '@tailwindcss/vite'
 import laravel from 'laravel-vite-plugin'
-import { wordpressPlugin, wordpressThemeJson } from '@roots/vite-plugin'
+import { wordpressPlugin } from '@roots/vite-plugin'
 
 export default defineConfig({
   plugins: [
-    tailwindcss(),
     laravel({
       input: [
         'resources/css/app.css',
@@ -16,14 +14,9 @@ export default defineConfig({
       refresh: true,
     }),
     wordpressPlugin(),
-    wordpressThemeJson({
-      disableTailwindColors: false,
-      disableTailwindFonts: false,
-      disableTailwindFontSizes: false,
-    }),
   ],
   build: {
-    manifest: 'manifest.json', // Specify manifest filename
+    manifest: 'manifest.json',
     outDir: 'public/build',
     rollupOptions: {
       output: {

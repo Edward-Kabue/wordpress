@@ -142,6 +142,7 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Forum&family=Jost:ital,wght@0,100..900;1,100..900&display=swap', [], null);
     
     // Add external stylesheets
+    wp_enqueue_style('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css', [], null);
     wp_enqueue_style('slicknav', 'https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/slicknav.min.css', [], null);
     wp_enqueue_style('swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', [], null);
     wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css', [], null);
@@ -150,7 +151,6 @@ add_action('wp_enqueue_scripts', function () {
     
     // Add custom stylesheets
     wp_enqueue_style('mouse-cursor', get_template_directory_uri() . '/resources/css/mousecursor.css', [], null);
-    wp_enqueue_style('custom', get_template_directory_uri() . '/resources/css/custom.css', [], null);
 }, 100);
 
 namespace App;
