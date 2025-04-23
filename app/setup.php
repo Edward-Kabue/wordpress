@@ -150,12 +150,13 @@ namespace App;
 
 use StoutLogic\AcfBuilder\FieldsBuilder;
 
-$home_page = new FieldsBuilder('home_page');
-$home_page
-    ->setLocation('page_template', '==', 'template-home.blade.php')
+$home = new FieldsBuilder('home');
+
+$home
+    ->setLocation('page_template', '==', 'views/template-home.blade.php')
     ->addImage('hero_background', [
-        'label' => 'Hero Background Image',
-        'return_format' => 'url',  // Changed from 'array' to 'url'
+        'label' => 'Hero Background',
+        'return_format' => 'url',
     ])
     ->addText('hero_subtitle', [
         'label' => 'Hero Subtitle',
@@ -165,42 +166,49 @@ $home_page
         'label' => 'Hero Title',
         'default_value' => 'Step into the aroma of freshly coffee',
     ])
-    ->addTextarea('hero_description', [
-        'label' => 'Hero Description',
-        'default_value' => 'Discover a place where every cup is a masterpiece, crafted with passion and precision. From the rich, bold flavors of our signature blends to the cozy ambiance that feels like home.',
-    ])
-    ->addText('discover_button_text', [
-        'label' => 'Discover Button Text',
-        'default_value' => 'Discover coffee',
-    ])
-    ->addText('discover_button_link', [
-        'label' => 'Discover Button Link',
-        'default_value' => '/about',
-    ])
-    ->addText('book_button_text', [
-        'label' => 'Book Button Text',
-        'default_value' => 'book a table',
-    ])
-    ->addText('book_button_link', [
-        'label' => 'Book Button Link',
-        'default_value' => '/book-table',
-    ])
-    ->addRepeater('ticker_items', [
-        'label' => 'Ticker Items',
+    ->addTextarea('hero_description')
+    ->addLink('hero_primary_button')
+    ->addLink('hero_secondary_button')
+    ->addRepeater('coffee_items', [
+        'label' => 'Coffee Items',
         'layout' => 'table',
-        'button_label' => 'Add Ticker Item',
     ])
-        ->addImage('icon', [
-            'label' => 'Icon',
-            'return_format' => 'array',
-        ])
-        ->addText('text', [
-            'label' => 'Text',
-        ])
+        ->addText('name')
+    ->endRepeater()
+    ->addText('about_subtitle')
+    ->addText('about_title')
+    ->addRepeater('about_features', [
+        'layout' => 'block',
+    ])
+        ->addImage('icon')
+        ->addText('title')
+        ->addTextarea('description')
+    ->endRepeater()
+    ->addLink('about_button')
+    ->addUrl('about_video_url')
+    ->addImage('about_image')
+    ->addText('opening_hours_title')
+    ->addRepeater('opening_hours', [
+        'layout' => 'table',
+    ])
+        ->addText('days')
+        ->addText('time')
     ->endRepeater();
 
-add_action('acf/init', function() use ($home_page) {
-    acf_add_local_field_group($home_page->build());
+add_action('acf/init', function() use ($home) {
+    acf_add_local_field_group($home->build());
 });
 
+// Add site options
+$options = new FieldsBuilder('theme_options');
 
+$options
+    ->setLocation('options_page', '==', 'theme-options')
+    ->addImage('asterisk_icon', [
+        'label' => 'Asterisk Icon',
+        'return_format' => 'id',
+    ]);
+
+add_action('acf/init', function() use ($options) {
+    acf_add_local_field_group($options->build());
+});
