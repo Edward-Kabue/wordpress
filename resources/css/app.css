@@ -1,11 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* Import the provided styles */
-@import "tailwindcss/theme";
-@source "../views/";
-@source "../../app/";
+/* Remove problematic imports */
+/* @import "../views/"; */
+/* @import "../../app/"; */
 
 /************************************/
 /***        04. Hero css	      ***/
@@ -2561,5 +2558,3 @@
   @apply w-full rounded-lg;
 }
 }
-
-
