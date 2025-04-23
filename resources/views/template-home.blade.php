@@ -19,6 +19,11 @@
               </div>
               
               <div class="hero-btn wow fadeInUp" data-wow-delay="0.4s">
+                @php
+                  $primary_button = get_field('hero_primary_button');
+                  $secondary_button = get_field('hero_secondary_button');
+                @endphp
+                
                 @if($primary_button)
                   <a href="{{ $primary_button['url'] ?? '#' }}" class="btn-default" {!! $primary_button['target'] ? 'target="' . $primary_button['target'] . '"' : '' !!}>
                     {{ $primary_button['title'] ?? 'Learn More' }}
@@ -166,6 +171,7 @@
   }
 </script>
 @endpush
+
 
 
 
