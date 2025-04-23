@@ -1,5 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Import the provided styles */
-@import "tailwindcss" theme(static);
+@import "tailwindcss/theme";
 @source "../views/";
 @source "../../app/";
 
@@ -2557,10 +2561,5 @@
   @apply w-full rounded-lg;
 }
 }
-
-
-
-
-
 
 

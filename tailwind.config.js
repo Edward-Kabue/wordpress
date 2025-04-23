@@ -23,10 +23,21 @@ export default {
           light: '#34D399',
         },
       },
-      backgroundColor: theme => ({
-        ...theme('colors'),
-      }),
     },
   },
   plugins: [],
+  safelist: [
+    'bg-primary',
+    'bg-primary-dark',
+    'bg-primary-light',
+    'bg-secondary',
+    'bg-secondary-dark',
+    'bg-secondary-light',
+    'bg-accent',
+    'bg-accent-dark',
+    'bg-accent-light',
+  ],
 }
+
+
+
