@@ -158,6 +158,72 @@ add_action('widgets_init', function () {
     ] + $config);
 });
 
+/**
+ * Theme setup
+ */
+add_action('wp_enqueue_scripts', function () {
+    // Enqueue external scripts
+    wp_enqueue_script('gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js', [], null, true);
+    wp_enqueue_script('scrolltrigger', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js', ['gsap'], null, true);
+    wp_enqueue_script('splittext', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/SplitText.min.js', ['gsap'], null, true);
+    wp_enqueue_script('wow', 'https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js', [], null, true);
+    wp_enqueue_script('parallaxie', 'https://cdnjs.cloudflare.com/ajax/libs/parallaxie/0.5/parallaxie.min.js', ['jquery'], null, true);
+}, 100);
 
+namespace App;
 
+use StoutLogic\AcfBuilder\FieldsBuilder;
+
+$home_page = new FieldsBuilder('home_page');
+$home_page
+    ->setLocation('page_template', '==', 'template-home.blade.php')
+    ->addImage('hero_background', [
+        'label' => 'Hero Background Image',
+        'return_format' => 'array',
+    ])
+    ->addText('hero_subtitle', [
+        'label' => 'Hero Subtitle',
+        'default_value' => 'crafted with love, served with passion',
+    ])
+    ->addText('hero_title', [
+        'label' => 'Hero Title',
+        'default_value' => 'Step into the aroma of freshly coffee',
+    ])
+    ->addTextarea('hero_description', [
+        'label' => 'Hero Description',
+        'default_value' => 'Discover a place where every cup is a masterpiece, crafted with passion and precision. From the rich, bold flavors of our signature blends to the cozy ambiance that feels like home.',
+    ])
+    ->addText('discover_button_text', [
+        'label' => 'Discover Button Text',
+        'default_value' => 'Discover coffee',
+    ])
+    ->addText('discover_button_link', [
+        'label' => 'Discover Button Link',
+        'default_value' => '/about',
+    ])
+    ->addText('book_button_text', [
+        'label' => 'Book Button Text',
+        'default_value' => 'book a table',
+    ])
+    ->addText('book_button_link', [
+        'label' => 'Book Button Link',
+        'default_value' => '/book-table',
+    ])
+    ->addRepeater('ticker_items', [
+        'label' => 'Ticker Items',
+        'layout' => 'table',
+        'button_label' => 'Add Ticker Item',
+    ])
+        ->addImage('icon', [
+            'label' => 'Icon',
+            'return_format' => 'array',
+        ])
+        ->addText('text', [
+            'label' => 'Text',
+        ])
+    ->endRepeater();
+
+add_action('acf/init', function() use ($home_page) {
+    acf_add_local_field_group($home_page->build());
+});
 

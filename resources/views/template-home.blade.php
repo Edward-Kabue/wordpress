@@ -7,7 +7,7 @@
 @section('content')
   <div class="home-page">
     {{-- Hero Section --}}
-    <div class="hero parallaxie">
+    <div class="hero parallaxie" @if(get_field('hero_background')) style="background-image: url('{{ get_field('hero_background')['url'] }}')" @endif>
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-8 col-md-10">
@@ -31,18 +31,31 @@
     {{-- Scrolling Ticker Section --}}
     <div class="our-scrolling-ticker">
       <div class="scrolling-ticker-box">
-        @if(have_rows('ticker_items'))
-          <div class="scrolling-content">
+        <div class="scrolling-content">
+          @if(have_rows('ticker_items'))
             @while(have_rows('ticker_items')) @php(the_row())
-              <span><img src="{{ get_sub_field('icon') }}" alt="">{{ get_sub_field('text') }}</span>
+              <span><img src="{{ get_sub_field('icon')['url'] ?: get_theme_file_uri('resources/images/asterisk-icon.svg') }}" alt="">{{ get_sub_field('text') }}</span>
             @endwhile
-          </div>
-          <div class="scrolling-content">
+          @else
+            <span><img src="{{ get_theme_file_uri('resources/images/asterisk-icon.svg') }}" alt="">Espresso</span>
+            <span><img src="{{ get_theme_file_uri('resources/images/asterisk-icon.svg') }}" alt="">Americano</span>
+            <span><img src="{{ get_theme_file_uri('resources/images/asterisk-icon.svg') }}" alt="">Latte</span>
+            {{-- Add more default items as needed --}}
+          @endif
+        </div>
+        {{-- Duplicate for continuous scroll effect --}}
+        <div class="scrolling-content">
+          @if(have_rows('ticker_items'))
             @while(have_rows('ticker_items')) @php(the_row())
-              <span><img src="{{ get_sub_field('icon') }}" alt="">{{ get_sub_field('text') }}</span>
+              <span><img src="{{ get_sub_field('icon')['url'] ?: get_theme_file_uri('resources/images/asterisk-icon.svg') }}" alt="">{{ get_sub_field('text') }}</span>
             @endwhile
-          </div>
-        @endif
+          @else
+            <span><img src="{{ get_theme_file_uri('resources/images/asterisk-icon.svg') }}" alt="">Espresso</span>
+            <span><img src="{{ get_theme_file_uri('resources/images/asterisk-icon.svg') }}" alt="">Americano</span>
+            <span><img src="{{ get_theme_file_uri('resources/images/asterisk-icon.svg') }}" alt="">Latte</span>
+            {{-- Add more default items as needed --}}
+          @endif
+        </div>
       </div>
     </div>
 
@@ -124,6 +137,32 @@
   </div>
 @endsection
 
+@push('scripts')
+<script>
+  // Initialize WOW.js
+  new WOW().init();
+  
+  // Initialize Parallaxie
+  $('.parallaxie').parallaxie({
+    speed: 0.5,
+    offset: 50
+  });
 
+  // Initialize text animation
+  if (typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+    
+    const splitText = new SplitText(".text-anime-style-3", {type:"chars"});
+    const chars = splitText.chars;
 
+    gsap.from(chars, {
+      duration: 0.8,
+      opacity:0,
+      y:40,
+      ease:"back.out",
+      stagger: 0.02,
+    });
+  }
+</script>
+@endpush
 
