@@ -179,7 +179,7 @@ $home_page
     ->setLocation('page_template', '==', 'template-home.blade.php')
     ->addImage('hero_background', [
         'label' => 'Hero Background Image',
-        'return_format' => 'array',
+        'return_format' => 'url',  // Changed from 'array' to 'url'
     ])
     ->addText('hero_subtitle', [
         'label' => 'Hero Subtitle',
@@ -226,4 +226,5 @@ $home_page
 add_action('acf/init', function() use ($home_page) {
     acf_add_local_field_group($home_page->build());
 });
+
 

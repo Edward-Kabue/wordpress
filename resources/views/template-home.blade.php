@@ -7,7 +7,7 @@
 @section('content')
   <div class="home-page">
     {{-- Hero Section --}}
-    <div class="hero parallaxie" @if(get_field('hero_background')) style="background-image: url('{{ get_field('hero_background')['url'] }}')" @endif>
+    <div class="hero parallaxie" @if($hero_bg = get_field('hero_background')) style="background-image: url('{{ is_array($hero_bg) ? $hero_bg['url'] : $hero_bg }}')" @endif>
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-8 col-md-10">
@@ -165,4 +165,5 @@
   }
 </script>
 @endpush
+
 
