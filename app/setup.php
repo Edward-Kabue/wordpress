@@ -12,73 +12,26 @@ use Illuminate\Support\Facades\Vite;
  * Theme assets
  */
 add_action('wp_enqueue_scripts', function () {
-    // Dequeue WordPress core block styles to prevent conflicts
-    wp_dequeue_style('wp-block-library');
-    wp_dequeue_style('wp-block-library-theme');
-    
-    // Re-enqueue them properly
-    wp_enqueue_style('wp-block-library');
-    wp_enqueue_style('wp-block-library-theme');
-    
-    // Register theme stylesheet with dependencies
-    wp_register_style('sage/app', false, ['wp-block-library', 'wp-block-library-theme']);
+    wp_enqueue_script('sage/vendor.js', false, [], null, true);
+    wp_enqueue_script('sage/app.js', false, ['sage/vendor.js'], null, true);
+    wp_enqueue_style('sage/app.css', false, [], null);
 }, 100);
 
 /**
- * Inject styles into the block editor.
- *
- * @return array
- */
-add_filter('block_editor_settings_all', function ($settings) {
-    $style = Vite::asset('resources/css/editor.css');
-
-    $settings['styles'][] = [
-        'css' => "@import url('{$style}')",
-    ];
-
-    return $settings;
-});
-
-/**
- * Inject scripts into the block editor.
- *
- * @return void
- */
-add_action('admin_head', function () {
-    if (! get_current_screen()?->is_block_editor()) {
-        return;
-    }
-
-    $dependencies = json_decode(Vite::content('editor.deps.json'));
-
-    foreach ($dependencies as $dependency) {
-        if (! wp_script_is($dependency)) {
-            wp_enqueue_script($dependency);
-        }
-    }
-
-    echo Vite::withEntryPoints([
-        'resources/js/editor.js',
-    ])->toHtml();
-});
-
-/**
- * Use the generated theme.json file.
- *
- * @return string
- */
-add_filter('theme_file_path', function ($path, $file) {
-    return $file === 'theme.json'
-        ? public_path('build/assets/theme.json')
-        : $path;
-}, 10, 2);
-
-/**
  * Register the initial theme setup.
- *
- * @return void
  */
 add_action('after_setup_theme', function () {
+    /**
+     * Enable features from the Soil plugin if activated.
+     * @link https://roots.io/plugins/soil/
+     */
+    add_theme_support('soil', [
+        'clean-up',
+        'nav-walker',
+        'nice-search',
+        'relative-urls',
+    ]);
+
     /**
      * Disable full-site editing support.
      *
@@ -88,7 +41,6 @@ add_action('after_setup_theme', function () {
 
     /**
      * Register the navigation menus.
-     *
      * @link https://developer.wordpress.org/reference/functions/register_nav_menus/
      */
     register_nav_menus([
@@ -96,42 +48,66 @@ add_action('after_setup_theme', function () {
     ]);
 
     /**
-     * Disable the default block patterns.
-     *
-     * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#disabling-the-default-block-patterns
+     * Register the editor color palette.
+     * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#block-color-palettes
      */
-    remove_theme_support('core-block-patterns');
+    add_theme_support('editor-color-palette', []);
 
     /**
-     * Enable plugins to manage the document title.
-     *
+     * Register the editor color gradient presets.
+     * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#block-gradient-presets
+     */
+    add_theme_support('editor-gradient-presets', []);
+
+    /**
+     * Register the editor font sizes.
+     * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#block-font-sizes
+     */
+    add_theme_support('editor-font-sizes', []);
+
+    /**
+     * Register relative length units in the editor.
+     * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#support-custom-units
+     */
+    add_theme_support('custom-units');
+
+    /**
+     * Enable plugins to manage the document title
      * @link https://developer.wordpress.org/reference/functions/add_theme_support/#title-tag
      */
     add_theme_support('title-tag');
 
     /**
-     * Enable support for Elementor
-     */
-    add_theme_support('elementor');
-
-    /**
-     * Enable full Gutenberg support
-     */
-    add_theme_support('align-wide');
-    add_theme_support('responsive-embeds');
-    add_theme_support('editor-styles');
-    add_theme_support('wp-block-styles');
-
-    /**
-     * Enable support for Post Thumbnails on posts and pages.
+     * Enable post thumbnail support
      * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
      */
     add_theme_support('post-thumbnails');
 
     /**
-     * Enable shortcode support in widgets
+     * Enable responsive embed support
+     * @link https://wordpress.org/gutenberg/handbook/designers-developers/developers/themes/theme-support/#responsive-embedded-content
      */
-    add_filter('widget_text', 'do_shortcode');
+    add_theme_support('responsive-embeds');
+
+    /**
+     * Enable HTML5 markup support
+     * @link https://developer.wordpress.org/reference/functions/add_theme_support/#html5
+     */
+    add_theme_support('html5', [
+        'caption',
+        'comment-form',
+        'comment-list',
+        'gallery',
+        'search-form',
+        'script',
+        'style',
+    ]);
+
+    /**
+     * Enable selective refresh for widgets in customizer
+     * @link https://developer.wordpress.org/themes/advanced-topics/customizer-api/#theme-support-in-sidebars
+     */
+    add_theme_support('customize-selective-refresh-widgets');
 }, 20);
 
 /**

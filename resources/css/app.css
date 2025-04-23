@@ -10,7 +10,6 @@
   align-items: center;
   padding: 120px 0;
 }
-
 .hero::before {
   content: '';
   position: absolute;
@@ -18,16 +17,13 @@
   background: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
-
 .hero .container {
   position: relative;
   z-index: 2;
 }
-
 .hero-content {
   max-width: 800px;
 }
-
 .hero-tagline {
   font-size: 14px;
   text-transform: uppercase;
@@ -44,16 +40,13 @@
     transform: translateX(-50%);
   }
 }
-
 .animate-scroll {
   animation: scroll 20s linear infinite;
 }
-
 .scroll-content {
   display: inline-flex;
   animation: scroll 20s linear infinite;
 }
-
 .scroll-content span {
   font-size: 18px;
   font-weight: 500;
@@ -68,7 +61,6 @@
   text-transform: capitalize;
   transition: all 0.3s ease;
 }
-
 .btn-primary:hover, .btn-secondary:hover {
   transform: translateY(-2px);
 }
@@ -79,17 +71,14 @@
   background-color: var(--secondary-color);
   overflow: hidden;
 }
-
 .scrolling-ticker-box {
   display: flex;
   white-space: nowrap;
 }
-
 .scrolling-content {
   display: flex;
   animation: scroll 20s linear infinite;
 }
-
 .scrolling-content span {
   display: inline-flex;
   align-items: center;
@@ -97,31 +86,19 @@
   font-size: 16px;
   margin-right: 40px;
 }
-
 .scrolling-content span img {
   margin-right: 10px;
   width: 20px;
   height: 20px;
 }
 
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
 /* Animation Classes */
 .wow {
   visibility: hidden;
 }
-
 .fadeInUp {
   animation: fadeInUp 1s ease forwards;
 }
-
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -141,21 +118,34 @@
   --accent-color: #E6B325;
   --accent-color-dark: #D4A420;
 }
-/* Contact Page Styles */
+
+/* Contact Page Styles - REMOVE @apply DIRECTIVES FOR NOW */
 .contact-form .wpcf7-form input,
 .contact-form .wpcf7-form textarea {
-  @apply w-full px-4 py-2 border border-gray-300 rounded-lg mb-4;
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
 }
-
 .contact-form .wpcf7-form input[type="submit"] {
-  @apply bg-primary text-white font-bold py-3 px-8 rounded-lg cursor-pointer;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 700;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
 }
-
 .contact-form .wpcf7-form input[type="submit"]:hover {
-  @apply bg-primary-dark;
+  background-color: var(--primary-color-dark);
 }
-
 .contact-details iframe {
-  @apply w-full rounded-lg;
+  width: 100%;
+  border-radius: 0.5rem;
 }
-
