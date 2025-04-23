@@ -1,5 +1,6 @@
 /* Import Bootstrap */
 @import 'bootstrap.min.css';
+@import 'sections/bestsellers.css';
 /************************************/
 /*** 	 01. Global Variables	  ***/
 /************************************/	

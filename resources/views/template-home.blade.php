@@ -1248,7 +1248,7 @@
         </div>
     </div>
     <!-- About Restaurant Section End -->
-
+    @include('sections.bestsellers')
     <!-- Our Testimonials Section Start -->
     <div class="our-testimonials parallaxie">
         <div class="container">
