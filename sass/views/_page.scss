@@ -1,0 +1,67 @@
+// Page styles
+
+// Default page styles
+.page {
+  .entry-header {
+    margin-bottom: 2rem;
+  }
+
+  .entry-title {
+    margin-top: 0;
+  }
+
+  .entry-featured-image {
+    margin-bottom: 2rem;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .entry-content {
+    margin-bottom: 2rem;
+  }
+}
+
+// Page with sidebar
+.page .has-sidebar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+
+  @media (min-width: 768px) {
+    flex-wrap: nowrap;
+  }
+
+  .content-area {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .sidebar {
+    width: 100%;
+
+    @media (min-width: 768px) {
+      width: 300px;
+    }
+  }
+}
+
+// Full-width page
+.page .full-width {
+  .entry-featured-image.full-width {
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    max-width: 100vw;
+    width: 100vw;
+  }
+}
+
+// Page without title
+.page .no-title {
+  .entry-content {
+    margin-top: 0;
+  }
+}
