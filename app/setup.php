@@ -164,3 +164,36 @@ add_action('widgets_init', function () {
         'description' => __('Widgets for WooCommerce shop sidebar', 'grind'),
     ] + $config);
 });
+
+add_action('acf/init', function () {
+    if (function_exists('acf_register_block_type')) {
+        acf_register_block_type([
+            'name'              => 'why-choose-us',
+            'title'             => __('Why Choose Us'),
+            'description'       => __('A custom why choose us section block.'),
+            'render_template'   => 'resources/views/blocks/why-choose-us.blade.php',
+            'category'          => 'formatting',
+            'icon'              => 'admin-comments',
+            'keywords'          => ['features', 'why choose'],
+            'enqueue_assets'    => function() {
+                // The styles are already included globally
+            },
+        ]);
+
+        acf_register_block_type([
+            'name'              => 'hero-section',
+            'title'             => __('Hero Section'),
+            'description'       => __('A custom hero section with parallax effect'),
+            'render_template'   => 'resources/views/blocks/hero-section.blade.php',
+            'category'          => 'formatting',
+            'icon'              => 'cover-image',
+            'keywords'          => ['hero', 'banner', 'header'],
+            'supports'          => [
+                'align' => false,
+                'jsx' => true,
+            ],
+        ]);
+    }
+});
+
+
