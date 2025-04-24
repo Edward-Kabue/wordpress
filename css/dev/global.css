@@ -373,6 +373,128 @@ img {
 @media (max-width: 600px) {
 }
 
+/**
+ * Hero Section Styles
+ */
+
+.hero-section {
+  position: relative;
+  background-color: #000;
+  background-image: url('../img/coffee-hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  padding: 6rem 2rem;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-tagline {
+  font-size: var(--typography-size-16);
+  color: #e6d7c3; /* Beige color */
+  margin-bottom: 1rem;
+  font-weight: var(--typography-weight-medium);
+}
+
+.hero-title {
+  font-size: 64px;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  font-weight: var(--typography-weight-bold);
+  color: #fff;
+}
+
+.hero-description {
+  font-size: var(--typography-size-18);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  max-width: 800px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  font-weight: var(--typography-weight-medium);
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button-primary {
+  background-color: #e6d7c3; /* Beige color */
+  color: #000;
+}
+
+.button-primary:hover {
+  background-color: #d6c7b3;
+}
+
+.button-secondary {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.button-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 42px;
+  }
+
+  .hero-description {
+    font-size: var(--typography-size-16);
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 4rem 1.5rem;
+    min-height: 600px;
+  }
+
+  .hero-title {
+    font-size: 32px;
+  }
+}
+
 .screen-reader-text {
   border: 0;
   clip: rect(1px, 1px, 1px, 1px);
