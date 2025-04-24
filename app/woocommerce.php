@@ -10,7 +10,7 @@
 add_action('after_setup_theme', function () {
     // Add WooCommerce support
     add_theme_support('woocommerce');
-    
+
     // Add Product Gallery support
     add_theme_support('wc-product-gallery-zoom');
     add_theme_support('wc-product-gallery-lightbox');
@@ -38,7 +38,7 @@ add_filter('woocommerce_output_related_products_args', function ($args) {
         'posts_per_page' => 3,
         'columns' => 3,
     ];
-    
+
     return $args;
 });
 
@@ -81,15 +81,7 @@ add_filter('loop_shop_per_page', function () {
     return 9;
 });
 
-/**
- * Add 'wow fadeInUp' class to products
- */
-add_filter('woocommerce_post_class', function ($classes) {
-    $classes[] = 'wow';
-    $classes[] = 'fadeInUp';
-    
-    return $classes;
-}, 10, 1);
+
 
 /**
  * Modify Add to Cart button text
@@ -105,29 +97,4 @@ add_filter('woocommerce_sale_flash', function () {
     return '<span class="onsale bg-secondary text-white py-1 px-3 rounded-full">' . __('Sale!', 'grind') . '</span>';
 });
 
-/**
- * Add magic cursor to WooCommerce elements
- */
-add_action('wp_footer', function () {
-    if (function_exists('is_woocommerce') && (is_woocommerce() || is_cart() || is_checkout())) {
-        ?>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const addMagicCursorToWooElements = () => {
-                    const wooElements = document.querySelectorAll('.add_to_cart_button, .single_add_to_cart_button, .product a');
-                    
-                    if (window.handleHover && window.handleLeave) {
-                        wooElements.forEach(element => {
-                            element.addEventListener('mouseenter', window.handleHover);
-                            element.addEventListener('mouseleave', window.handleLeave);
-                        });
-                    }
-                };
-                
-                // Run after a slight delay to ensure all elements are loaded
-                setTimeout(addMagicCursorToWooElements, 500);
-            });
-        </script>
-        <?php
-    }
-});
+

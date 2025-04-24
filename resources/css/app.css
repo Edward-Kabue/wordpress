@@ -5,8 +5,7 @@
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
-/* Import Animation Libraries */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
 
 /* Base Styles */
 :root {
@@ -102,29 +101,7 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom: none;
 }
 
-/* Magic Cursor Styles */
-.magic-cursor {
-  position: fixed;
-  width: 30px;
-  height: 30px;
-  border: 2px solid var(--color-secondary);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  transition: width 0.3s, height 0.3s, border-color 0.3s;
-  z-index: 9999;
-}
 
-.magic-cursor-dot {
-  position: fixed;
-  width: 8px;
-  height: 8px;
-  background-color: var(--color-secondary);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 9999;
-}
 
 /* WooCommerce Styles */
 .woocommerce ul.products li.product {

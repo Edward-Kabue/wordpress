@@ -3,9 +3,6 @@ import.meta.glob([
   '../fonts/**',
 ]);
 
-// Import WOW.js for animations
-import 'wowjs/dist/wow.min.js';
-
 // Load Font Awesome
 const loadFontAwesome = () => {
   const fontAwesomeLink = document.createElement('link');
@@ -14,59 +11,9 @@ const loadFontAwesome = () => {
   document.head.appendChild(fontAwesomeLink);
 };
 
-// Initialize WOW.js
 document.addEventListener('DOMContentLoaded', function() {
   // Load Font Awesome
   loadFontAwesome();
-
-  // Initialize WOW.js
-  new WOW().init();
-
-  // Magic Cursor
-  const createMagicCursor = () => {
-    // Create cursor elements
-    const cursor = document.createElement('div');
-    cursor.classList.add('magic-cursor');
-    document.body.appendChild(cursor);
-
-    const cursorDot = document.createElement('div');
-    cursorDot.classList.add('magic-cursor-dot');
-    document.body.appendChild(cursorDot);
-
-    // Track mouse movement
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-
-      cursorDot.style.left = e.clientX + 'px';
-      cursorDot.style.top = e.clientY + 'px';
-    });
-
-    // Add hover effect for links and buttons
-    window.handleHover = (e) => {
-      cursor.style.width = '50px';
-      cursor.style.height = '50px';
-      cursor.style.borderColor = 'var(--color-accent)';
-    };
-
-    window.handleLeave = (e) => {
-      cursor.style.width = '30px';
-      cursor.style.height = '30px';
-      cursor.style.borderColor = 'var(--color-secondary)';
-    };
-
-    // Add event listeners to all links and buttons
-    const links = document.querySelectorAll('a, button, .btn, .woocommerce-loop-product__link, .nav-item');
-    links.forEach(link => {
-      link.addEventListener('mouseenter', window.handleHover);
-      link.addEventListener('mouseleave', window.handleLeave);
-    });
-  };
-
-  // Only initialize magic cursor on desktop
-  if (window.innerWidth > 768) {
-    createMagicCursor();
-  }
 
   // Smooth scrolling for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -195,57 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   setupHeader();
 
-  // Add animation classes to elements
-  const addAnimationClasses = () => {
-    // Hero section elements
-    document.querySelectorAll('.hero-title').forEach(el => {
-      el.classList.add('wow', 'fadeInUp');
-    });
 
-    document.querySelectorAll('.hero-subtitle').forEach(el => {
-      el.classList.add('wow', 'fadeInUp');
-      el.setAttribute('data-wow-delay', '0.2s');
-    });
-
-    document.querySelectorAll('.hero-content .btn-primary').forEach(el => {
-      el.classList.add('wow', 'fadeInUp');
-      el.setAttribute('data-wow-delay', '0.4s');
-    });
-
-    // Section titles
-    document.querySelectorAll('.section-title').forEach(el => {
-      el.classList.add('wow', 'fadeInUp');
-    });
-
-    // Coffee cards
-    document.querySelectorAll('.coffee-card').forEach((el, index) => {
-      el.classList.add('wow', 'fadeInUp');
-      el.setAttribute('data-wow-delay', `${0.1 * index}s`);
-    });
-
-    // Testimonials
-    document.querySelectorAll('.testimonial').forEach((el, index) => {
-      el.classList.add('wow', 'fadeInUp');
-      el.setAttribute('data-wow-delay', `${0.1 * index}s`);
-    });
-
-    // Header elements
-    document.querySelectorAll('.header-info').forEach((el, index) => {
-      el.classList.add('wow', 'fadeInDown');
-      el.setAttribute('data-wow-delay', `${0.1 * index}s`);
-    });
-
-    document.querySelectorAll('.top-header-right a').forEach((el, index) => {
-      el.classList.add('wow', 'fadeInDown');
-      el.setAttribute('data-wow-delay', `${0.2 + (0.1 * index)}s`);
-    });
-
-    document.querySelector('.logo')?.classList.add('wow', 'fadeInLeft');
-    document.querySelector('.nav-primary')?.classList.add('wow', 'fadeIn');
-    document.querySelector('.header-right')?.classList.add('wow', 'fadeInRight');
-  };
-
-  addAnimationClasses();
 
   // Add CSS animations
   const addCSSAnimations = () => {
