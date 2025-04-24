@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Special Events Icon</title>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon stroke="#4A3827" stroke-width="2" points="30 10 38.66 27.72 58 30.27 44 43.78 47.32 63 30 53.77 12.68 63 16 43.78 2 30.27 21.34 27.72"></polygon>
+        <circle fill="#4A3827" cx="30" cy="30" r="5"></circle>
+    </g>
+</svg>

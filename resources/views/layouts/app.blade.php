@@ -3,14 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
     @php(do_action('get_header'))
     @php(wp_head())
 
-    @viteReactRefresh
     @vite(['resources/css/app.css', 'resources/js/app.js'])
   </head>
 
@@ -41,5 +36,3 @@
     @php(wp_footer())
   </body>
 </html>
-
-

@@ -9,88 +9,112 @@ namespace App;
 use Illuminate\Support\Facades\Vite;
 
 /**
- * Theme assets
+ * Inject styles into the block editor.
+ *
+ * @return array
  */
-add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_script('sage/vendor.js', false, [], null, true);
-    wp_enqueue_script('sage/app.js', false, ['sage/vendor.js'], null, true);
-    wp_enqueue_style('sage/app.css', false, [], null);
-}, 100);
+add_filter('block_editor_settings_all', function ($settings) {
+    $style = Vite::asset('resources/css/editor.css');
+
+    $settings['styles'][] = [
+        'css' => "@import url('{$style}')",
+    ];
+
+    return $settings;
+});
+
+/**
+ * Inject scripts into the block editor.
+ *
+ * @return void
+ */
+add_filter('admin_head', function () {
+    if (! get_current_screen()?->is_block_editor()) {
+        return;
+    }
+
+    $dependencies = json_decode(Vite::content('editor.deps.json'));
+
+    foreach ($dependencies as $dependency) {
+        if (! wp_script_is($dependency)) {
+            wp_enqueue_script($dependency);
+        }
+    }
+
+    echo Vite::withEntryPoints([
+        'resources/js/editor.js',
+    ])->toHtml();
+});
+
+/**
+ * Use the generated theme.json file.
+ *
+ * @return string
+ */
+add_filter('theme_file_path', function ($path, $file) {
+    return $file === 'theme.json'
+        ? public_path('build/assets/theme.json')
+        : $path;
+}, 10, 2);
 
 /**
  * Register the initial theme setup.
+ *
+ * @return void
  */
 add_action('after_setup_theme', function () {
     /**
-     * Enable features from the Soil plugin if activated.
-     * @link https://roots.io/plugins/soil/
-     */
-    add_theme_support('soil', [
-        'clean-up',
-        'nav-walker',
-        'nice-search',
-        'relative-urls',
-    ]);
-
-    /**
-     * Disable full-site editing support.
+     * Enable full-site editing support.
      *
      * @link https://wptavern.com/gutenberg-10-5-embeds-pdfs-adds-verse-block-color-options-and-introduces-new-patterns
      */
-    remove_theme_support('block-templates');
+    add_theme_support('block-templates');
+    add_theme_support('wp-block-styles');
+    add_theme_support('align-wide');
+    add_theme_support('editor-styles');
 
     /**
      * Register the navigation menus.
+     *
      * @link https://developer.wordpress.org/reference/functions/register_nav_menus/
      */
     register_nav_menus([
-        'primary_navigation' => __('Primary Navigation', 'sage'),
+        'primary_navigation' => __('Primary Navigation', 'grind'),
+        'footer_navigation' => __('Footer Navigation', 'grind'),
+        'mobile_navigation' => __('Mobile Navigation', 'grind'),
     ]);
 
     /**
-     * Register the editor color palette.
-     * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#block-color-palettes
+     * Disable the default block patterns.
+     *
+     * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#disabling-the-default-block-patterns
      */
-    add_theme_support('editor-color-palette', []);
+    remove_theme_support('core-block-patterns');
 
     /**
-     * Register the editor color gradient presets.
-     * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#block-gradient-presets
-     */
-    add_theme_support('editor-gradient-presets', []);
-
-    /**
-     * Register the editor font sizes.
-     * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#block-font-sizes
-     */
-    add_theme_support('editor-font-sizes', []);
-
-    /**
-     * Register relative length units in the editor.
-     * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#support-custom-units
-     */
-    add_theme_support('custom-units');
-
-    /**
-     * Enable plugins to manage the document title
+     * Enable plugins to manage the document title.
+     *
      * @link https://developer.wordpress.org/reference/functions/add_theme_support/#title-tag
      */
     add_theme_support('title-tag');
 
     /**
-     * Enable post thumbnail support
+     * Enable post thumbnail support.
+     *
      * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
      */
     add_theme_support('post-thumbnails');
 
     /**
-     * Enable responsive embed support
-     * @link https://wordpress.org/gutenberg/handbook/designers-developers/developers/themes/theme-support/#responsive-embedded-content
+     * Enable responsive embed support.
+     *
+     * @link https://developer.wordpress.org/block-editor/how-to-guides/themes/theme-support/#responsive-embedded-content
      */
     add_theme_support('responsive-embeds');
 
     /**
-     * Enable HTML5 markup support
+     * Enable HTML5 markup support.
+     *
      * @link https://developer.wordpress.org/reference/functions/add_theme_support/#html5
      */
     add_theme_support('html5', [
@@ -104,8 +128,9 @@ add_action('after_setup_theme', function () {
     ]);
 
     /**
-     * Enable selective refresh for widgets in customizer
-     * @link https://developer.wordpress.org/themes/advanced-topics/customizer-api/#theme-support-in-sidebars
+     * Enable selective refresh for widgets in customizer.
+     *
+     * @link https://developer.wordpress.org/reference/functions/add_theme_support/#customize-selective-refresh-widgets
      */
     add_theme_support('customize-selective-refresh-widgets');
 }, 20);
@@ -124,104 +149,51 @@ add_action('widgets_init', function () {
     ];
 
     register_sidebar([
-        'name' => __('Primary', 'sage'),
+        'name' => __('Primary', 'grind'),
         'id' => 'sidebar-primary',
     ] + $config);
 
     register_sidebar([
-        'name' => __('Footer', 'sage'),
+        'name' => __('Footer', 'grind'),
         'id' => 'sidebar-footer',
+    ] + $config);
+
+    register_sidebar([
+        'name' => __('Shop Sidebar', 'grind'),
+        'id' => 'sidebar-shop',
+        'description' => __('Widgets for WooCommerce shop sidebar', 'grind'),
     ] + $config);
 });
 
-/**
- * Theme setup
- */
-add_action('wp_enqueue_scripts', function () {
-    // Add Google Fonts
-    wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Forum&family=Jost:ital,wght@0,100..900;1,100..900&display=swap', [], null);
-    
-    // Add external stylesheets
-    wp_enqueue_style('slicknav', 'https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/slicknav.min.css', [], null);
-    wp_enqueue_style('swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', [], null);
-    wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css', [], null);
-    wp_enqueue_style('animate', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css', [], null);
-    wp_enqueue_style('magnific-popup', 'https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css', [], null);
-    
-    // Add custom stylesheets
-    wp_enqueue_style('mouse-cursor', get_template_directory_uri() . '/resources/css/mousecursor.css', [], null);
-    wp_enqueue_style('custom', get_template_directory_uri() . '/resources/css/custom.css', [], null);
-}, 100);
+add_action('acf/init', function () {
+    if (function_exists('acf_register_block_type')) {
+        acf_register_block_type([
+            'name'              => 'why-choose-us',
+            'title'             => __('Why Choose Us'),
+            'description'       => __('A custom why choose us section block.'),
+            'render_template'   => 'resources/views/blocks/why-choose-us.blade.php',
+            'category'          => 'formatting',
+            'icon'              => 'admin-comments',
+            'keywords'          => ['features', 'why choose'],
+            'enqueue_assets'    => function() {
+                // The styles are already included globally
+            },
+        ]);
 
-namespace App;
-
-use StoutLogic\AcfBuilder\FieldsBuilder;
-
-$home = new FieldsBuilder('home');
-
-$home
-    ->setLocation('page_template', '==', 'views/template-home.blade.php')
-    ->addImage('hero_background', [
-        'label' => 'Hero Background',
-        'return_format' => 'url',
-    ])
-    ->addText('hero_subtitle', [
-        'label' => 'Hero Subtitle',
-        'default_value' => 'crafted with love, served with passion',
-    ])
-    ->addText('hero_title', [
-        'label' => 'Hero Title',
-        'default_value' => 'Step into the aroma of freshly coffee',
-    ])
-    ->addTextarea('hero_description')
-    ->addLink('hero_primary_button', [
-        'label' => 'Primary Button',
-        'return_format' => 'array',
-    ])
-    ->addLink('hero_secondary_button', [
-        'label' => 'Secondary Button',
-        'return_format' => 'array',
-    ])
-    ->addRepeater('coffee_items', [
-        'label' => 'Coffee Items',
-        'layout' => 'table',
-    ])
-        ->addText('name')
-    ->endRepeater()
-    ->addText('about_subtitle')
-    ->addText('about_title')
-    ->addRepeater('about_features', [
-        'layout' => 'block',
-    ])
-        ->addImage('icon')
-        ->addText('title')
-        ->addTextarea('description')
-    ->endRepeater()
-    ->addLink('about_button')
-    ->addUrl('about_video_url')
-    ->addImage('about_image')
-    ->addText('opening_hours_title')
-    ->addRepeater('opening_hours', [
-        'layout' => 'table',
-    ])
-        ->addText('days')
-        ->addText('time')
-    ->endRepeater();
-
-add_action('acf/init', function() use ($home) {
-    acf_add_local_field_group($home->build());
+        acf_register_block_type([
+            'name'              => 'hero-section',
+            'title'             => __('Hero Section'),
+            'description'       => __('A custom hero section with parallax effect'),
+            'render_template'   => 'resources/views/blocks/hero-section.blade.php',
+            'category'          => 'formatting',
+            'icon'              => 'cover-image',
+            'keywords'          => ['hero', 'banner', 'header'],
+            'supports'          => [
+                'align' => false,
+                'jsx' => true,
+            ],
+        ]);
+    }
 });
 
-// Add site options
-$options = new FieldsBuilder('theme_options');
 
-$options
-    ->setLocation('options_page', '==', 'theme-options')
-    ->addImage('asterisk_icon', [
-        'label' => 'Asterisk Icon',
-        'return_format' => 'id',
-    ]);
-
-add_action('acf/init', function() use ($options) {
-    acf_add_local_field_group($options->build());
-});

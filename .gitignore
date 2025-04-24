@@ -1,11 +1,6 @@
 /node_modules
 /vendor
-/public/hot
-/public/storage
+/public/*
+!/public/.gitkeep
 .env
-.env.*
-!.env.example
 npm-debug.log
-yarn-error.log
-.DS_Store
-
