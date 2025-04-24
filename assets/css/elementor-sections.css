@@ -1,0 +1,30 @@
+/* Elementor Section Styles */
+.twentytwentyfive-elementor-section {
+    padding: 80px 20px;
+    transition: all 0.3s ease;
+}
+
+.twentytwentyfive-elementor-section:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Editor Styles */
+.elementor-editor-active .twentytwentyfive-elementor-section {
+    position: relative;
+    border: 1px dashed #ccc;
+    margin: 15px 0;
+}
+
+.elementor-editor-active .twentytwentyfive-elementor-section:hover {
+    border-color: #71d7f7;
+}
+
+/* Section Templates */
+.elementor-add-section-area-button.twentytwentyfive-section {
+    background-color: #23282d;
+    color: #fff;
+}
+
+.elementor-add-section-area-button.twentytwentyfive-section:hover {
+    background-color: #0073aa;
+}
