@@ -1,8 +1,13 @@
 <?php
 /**
- * Twenty Twenty-Five functions and definitions.
+ * Gather all bits and pieces together.
+ * If you end up having multiple post types, taxonomies,
+ * hooks and functions - please split those to their
+ * own files under /inc and just require here.
  *
- * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ * @Date: 2019-10-15 12:30:02
+ * @Last Modified by:   Roni Laukkarinen
+ * @Last Modified time: 2024-01-10 18:54:48
  *
  * @package WordPress
  * @subpackage Twenty_Twenty_Five

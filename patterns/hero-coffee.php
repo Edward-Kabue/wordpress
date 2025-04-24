@@ -1,14 +1,11 @@
 <?php
 /**
  * Title: Coffee Hero Section
- * Slug: twentytwentyfive/hero-coffee
- * Categories: banner, daily-grind
- * Keywords: coffee, hero, banner
- * Description: A hero section for coffee shops with customizable background and text.
- *
- * @package WordPress
- * @subpackage Twenty_Twenty_Five
- * @since Twenty Twenty-Five 1.0
+ * Slug: twentytwentyfour/hero-coffee
+ * Categories: featured, hero
+ * Keywords: hero, coffee, banner
+ * Viewport width: 1400
+ * Description: A hero section for coffee shop with background image and call-to-action
  */
 ?>
 
@@ -50,4 +47,3 @@
     </div>
 </div>
 <!-- /wp:cover -->
-

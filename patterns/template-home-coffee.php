@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Template Name: Home Coffee Template
  */
 
@@ -157,3 +158,24 @@ get_header(); ?>
 </div>
 
 <?php get_footer(); ?>
+=======
+ * Title: Coffee Shop Home Template
+ * Slug: twentytwentyfour/template-home-coffee
+ * Template Types: front-page, home
+ * Viewport width: 1400
+ * Inserter: no
+ */
+?>
+
+<!-- wp:template-part {"slug":"header","area":"header","tagName":"header"} /-->
+
+<!-- wp:group {"tagName":"main","style":{"spacing":{"blockGap":"0","margin":{"top":"0"}}},"layout":{"type":"default"}} -->
+<main class="wp-block-group" style="margin-top:0">
+  <!-- wp:pattern {"slug":"twentytwentyfour/hero-coffee"} /-->
+  
+  <!-- wp:post-content {"layout":{"inherit":true}} /-->
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","area":"footer","tagName":"footer"} /-->
+>>>>>>> 130b0e2c9b6531d45edc2ee74f396d5a6935d62b
