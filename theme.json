@@ -152,5 +152,26 @@
       "name": "footer",
       "title": "Footer"
     }
+  ],
+  "templates": [
+    {
+      "name": "index",
+      "title": "Index",
+      "postTypes": ["post"]
+    },
+    {
+      "name": "home",
+      "title": "Home"
+    },
+    {
+      "name": "single",
+      "title": "Single Post",
+      "postTypes": ["post"]
+    },
+    {
+      "name": "page",
+      "title": "Page",
+      "postTypes": ["page"]
+    }
   ]
 }

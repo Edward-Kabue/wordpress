@@ -74,6 +74,11 @@ add_action('after_setup_theme', function () {
     add_theme_support('editor-styles');
 
     /**
+     * Add support for block template parts
+     */
+    add_theme_support('block-template-parts');
+
+    /**
      * Register the navigation menus.
      *
      * @link https://developer.wordpress.org/reference/functions/register_nav_menus/
