@@ -19,21 +19,9 @@
 		<!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|30","bottom":"var:preset|spacing|30"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between"}} -->
 		<div class="wp-block-group alignwide" style="padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">
 			<!-- wp:site-title {"level":0} /-->
-			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"right"}} -->
-			<div class="wp-block-group">
-				<?php
-				if ( has_nav_menu( 'primary-menu' ) ) {
-					wp_nav_menu( array(
-						'theme_location' => 'primary-menu',
-						'menu_class'     => 'primary-menu',
-						'container'      => 'nav',
-						'container_class'=> 'primary-navigation',
-						'walker'         => new Twenty_Twenty_Five_Walker_Nav_Menu(),
-					) );
-				}
-				?>
-			</div>
-			<!-- /wp:group -->
+			<!-- wp:navigation {"layout":{"type":"flex","justifyContent":"right"}} -->
+			<!-- wp:page-list /-->
+			<!-- /wp:navigation -->
 		</div>
 		<!-- /wp:group -->
 	</div>

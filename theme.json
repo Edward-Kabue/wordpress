@@ -746,10 +746,19 @@
 	],
 	"customTemplates": [
 		{
-			"name": "page-no-title",
-			"postTypes": ["page"],
-			"title": "Page No Title"
+			"name": "coffee-home",
+			"title": "Coffee Home",
+			"postTypes": ["page"]
+		},
+		{
+			"name": "home",
+			"title": "Coffee Shop Home",
+			"postTypes": ["page"]
 		}
 	]
 }
+
+
+
+
 
